@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://acf-framework.dev/schemas/acf-profile.schema.json",
+  "title": "ACF Profile",
+  "description": "An ACF certification profile for an AI system, containing per-dimension scores and an aggregate certification level.",
+  "type": "object",
+  "required": [
+    "system_id",
+    "system_version",
+    "timestamp",
+    "dimensions",
+    "aggregate_score",
+    "certification_level"
+  ],
+  "properties": {
+    "system_id": {
+      "type": "string",
+      "description": "Identifier for the evaluated AI system."
+    },
+    "system_version": {
+      "type": "string",
+      "description": "Version of the system at time of evaluation."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this profile was generated."
+    },
+    "dimensions": {
+      "type": "object",
+      "description": "Per-dimension scores (0-100 scale).",
+      "properties": {
+        "breadth": { "$ref": "#/$defs/dimension_score" },
+        "depth": { "$ref": "#/$defs/dimension_score" },
+        "formal_reasoning": { "$ref": "#/$defs/dimension_score" },
+        "factual_grounding": { "$ref": "#/$defs/dimension_score" },
+        "compositional_generalization": { "$ref": "#/$defs/dimension_score" },
+        "knowledge_transparency": { "$ref": "#/$defs/dimension_score" },
+        "service_orientation": { "$ref": "#/$defs/dimension_score" },
+        "generalization_boundary": { "$ref": "#/$defs/dimension_score" },
+        "autonomy": { "$ref": "#/$defs/dimension_score" }
+      },
+      "required": [
+        "breadth", "depth", "formal_reasoning", "factual_grounding",
+        "compositional_generalization", "knowledge_transparency",
+        "service_orientation", "generalization_boundary", "autonomy"
+      ],
+      "additionalProperties": false
+    },
+    "aggregate_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Weighted aggregate score across all dimensions."
+    },
+    "certification_level": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 6,
+      "description": "ACF certification level (0=None, 1=Elementary through 6=PhD/Board)."
+    },
+    "certification_label": {
+      "type": "string",
+      "description": "Human-readable certification label (e.g., 'ACF-3: High School')."
+    },
+    "weights": {
+      "type": "object",
+      "description": "Dimension weights used for aggregate scoring.",
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "dimension_score": {
+      "type": "object",
+      "required": ["score"],
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Score on 0-100 scale."
+        },
+        "sub_level": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Highest sub-level achieved within this dimension."
+        },
+        "evidence": {
+          "type": "string",
+          "description": "Brief description of how this score was determined."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

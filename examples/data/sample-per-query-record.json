@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "record_type": "per-query-record",
+  "system_id": "my-ai-system",
+  "system_version": "1.2.0",
+  "experiment_id": "EXP-001",
+  "query_id": "Q-0042",
+  "timestamp": "2026-01-15T10:30:42Z",
+  "query": "What are the primary treatment options for Stage II breast cancer?",
+  "expected_answer": "Surgery (lumpectomy or mastectomy), radiation therapy, chemotherapy, hormone therapy, and targeted therapy depending on tumor characteristics.",
+  "actual_answer": "Stage II breast cancer treatment typically involves surgery (breast-conserving surgery or mastectomy), followed by radiation therapy. Systemic treatments include chemotherapy, hormone therapy for hormone receptor-positive tumors, and targeted therapy (e.g., trastuzumab for HER2-positive cancers).",
+  "correct": true,
+  "latency_ms": 245.3,
+  "domain": "oncology",
+  "bloom_level": 2,
+  "measures": {
+    "M-003": 0.0,
+    "M-005": 1.0,
+    "M-006": 0.92
+  },
+  "signals": [
+    {
+      "source": "knowledge_graph",
+      "confidence": 0.95,
+      "value": "retrieved 12 relevant triples"
+    },
+    {
+      "source": "semantic_search",
+      "confidence": 0.88,
+      "value": "top-3 relevance score"
+    }
+  ],
+  "notes": "Correct answer with full provenance chain."
+}

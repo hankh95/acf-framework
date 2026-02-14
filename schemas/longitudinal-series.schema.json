@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://acf-framework.dev/schemas/longitudinal-series.schema.json",
+  "title": "ACF Longitudinal Series",
+  "description": "A time series of measurements for tracking a measure across system versions.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "record_type",
+    "system_id",
+    "measure_id",
+    "data_points"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "record_type": {
+      "type": "string",
+      "const": "longitudinal-series"
+    },
+    "system_id": {
+      "type": "string",
+      "description": "Identifier for the AI system being tracked."
+    },
+    "measure_id": {
+      "type": "string",
+      "pattern": "^M-[0-9]{3}$",
+      "description": "ACF measure identifier."
+    },
+    "target": {
+      "type": "number",
+      "description": "Target value for this measure."
+    },
+    "comparison": {
+      "type": "string",
+      "enum": ["GE", "GT", "LE", "LT", "EQ"],
+      "description": "Comparison operator for target evaluation."
+    },
+    "data_points": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["timestamp", "system_version", "value"],
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "system_version": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          },
+          "n": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "description": "Ordered list of measurements over time."
+    },
+    "notes": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "additionalProperties": false
+}

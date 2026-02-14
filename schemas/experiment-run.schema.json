@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://acf-framework.dev/schemas/experiment-run.schema.json",
+  "title": "ACF Experiment Run",
+  "description": "A single data collection event measuring one metric for one system version.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "record_type",
+    "system_id",
+    "system_version",
+    "experiment_id",
+    "measure_id",
+    "timestamp",
+    "value",
+    "target",
+    "comparison"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Schema version for forward compatibility."
+    },
+    "record_type": {
+      "type": "string",
+      "const": "experiment-run",
+      "description": "Discriminator field for record type."
+    },
+    "system_id": {
+      "type": "string",
+      "description": "Identifier for the AI system being evaluated (e.g., 'gpt-4', 'my-agent-v2')."
+    },
+    "system_version": {
+      "type": "string",
+      "description": "Semantic version of the system (e.g., '0.11.3')."
+    },
+    "experiment_id": {
+      "type": "string",
+      "description": "Identifier for the experiment or evaluation session."
+    },
+    "measure_id": {
+      "type": "string",
+      "pattern": "^M-[0-9]{3}$",
+      "description": "ACF measure identifier (e.g., 'M-003')."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the measurement."
+    },
+    "collector": {
+      "type": "string",
+      "enum": ["automated", "manual", "llm-graded"],
+      "default": "automated",
+      "description": "How the data was collected."
+    },
+    "n": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 0,
+      "description": "Sample size for this measurement."
+    },
+    "value": {
+      "type": "number",
+      "description": "Measured value."
+    },
+    "target": {
+      "type": "number",
+      "description": "Target threshold for pass/fail determination."
+    },
+    "comparison": {
+      "type": "string",
+      "enum": ["GE", "GT", "LE", "LT", "EQ"],
+      "description": "Comparison operator: value {comparison} target."
+    },
+    "pass": {
+      "type": "boolean",
+      "description": "Whether value meets the target (computed from value, target, comparison)."
+    },
+    "notes": {
+      "type": "string",
+      "default": "",
+      "description": "Free-text notes about this measurement."
+    },
+    "hypothesis_id": {
+      "type": "string",
+      "description": "Optional hypothesis this measurement provides evidence for."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional key-value metadata.",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

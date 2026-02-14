@@ -1,0 +1,67 @@
+{
+  "system_id": "my-ai-system",
+  "system_version": "1.2.0",
+  "timestamp": "2026-01-15T12:00:00Z",
+  "dimensions": {
+    "breadth": {
+      "score": 45.0,
+      "sub_level": 2,
+      "evidence": "3 domains with >80% coverage out of 10 evaluated"
+    },
+    "depth": {
+      "score": 62.0,
+      "sub_level": 3,
+      "evidence": "Strong L1-L3, moderate L4, weak L5-L6"
+    },
+    "formal_reasoning": {
+      "score": 55.0,
+      "sub_level": 3,
+      "evidence": "85% deductive accuracy, 60% multi-step reasoning"
+    },
+    "factual_grounding": {
+      "score": 88.0,
+      "sub_level": 4,
+      "evidence": "2.1% hallucination rate, 95% provenance attribution"
+    },
+    "compositional_generalization": {
+      "score": 30.0,
+      "sub_level": 1,
+      "evidence": "Limited novel combination capability"
+    },
+    "knowledge_transparency": {
+      "score": 92.0,
+      "sub_level": 4,
+      "evidence": "Full provenance chain, queryable knowledge graph"
+    },
+    "service_orientation": {
+      "score": 70.0,
+      "sub_level": 3,
+      "evidence": "245ms average latency, 78% task completion rate"
+    },
+    "generalization_boundary": {
+      "score": 82.0,
+      "sub_level": 4,
+      "evidence": "100% OOD detection, 75% graceful degradation"
+    },
+    "autonomy": {
+      "score": 40.0,
+      "sub_level": 2,
+      "evidence": "60% task autonomy, limited self-directed learning"
+    }
+  },
+  "aggregate_score": 62.7,
+  "certification_level": 3,
+  "certification_label": "ACF-3: High School",
+  "weights": {
+    "breadth": 0.111,
+    "depth": 0.111,
+    "formal_reasoning": 0.111,
+    "factual_grounding": 0.111,
+    "compositional_generalization": 0.111,
+    "knowledge_transparency": 0.111,
+    "service_orientation": 0.111,
+    "generalization_boundary": 0.111,
+    "autonomy": 0.111
+  },
+  "notes": "Sample ACF profile demonstrating a system strong in factual grounding and knowledge transparency but weaker in breadth and compositional generalization."
+}

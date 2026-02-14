@@ -1,0 +1,40 @@
+[
+  {
+    "system_id": "neurosymbolic-agent",
+    "system_version": "2.0.0",
+    "timestamp": "2026-02-01T00:00:00Z",
+    "dimensions": {
+      "breadth": { "score": 35.0, "sub_level": 2 },
+      "depth": { "score": 78.0, "sub_level": 4 },
+      "formal_reasoning": { "score": 72.0, "sub_level": 4 },
+      "factual_grounding": { "score": 95.0, "sub_level": 4 },
+      "compositional_generalization": { "score": 65.0, "sub_level": 3 },
+      "knowledge_transparency": { "score": 98.0, "sub_level": 4 },
+      "service_orientation": { "score": 60.0, "sub_level": 3 },
+      "generalization_boundary": { "score": 88.0, "sub_level": 4 },
+      "autonomy": { "score": 55.0, "sub_level": 3 }
+    },
+    "aggregate_score": 71.8,
+    "certification_level": 4,
+    "certification_label": "ACF-4: Bachelor's Degree"
+  },
+  {
+    "system_id": "large-language-model",
+    "system_version": "4.0",
+    "timestamp": "2026-02-01T00:00:00Z",
+    "dimensions": {
+      "breadth": { "score": 85.0, "sub_level": 4 },
+      "depth": { "score": 52.0, "sub_level": 3 },
+      "formal_reasoning": { "score": 60.0, "sub_level": 3 },
+      "factual_grounding": { "score": 45.0, "sub_level": 2 },
+      "compositional_generalization": { "score": 15.0, "sub_level": 1 },
+      "knowledge_transparency": { "score": 10.0, "sub_level": 1 },
+      "service_orientation": { "score": 80.0, "sub_level": 4 },
+      "generalization_boundary": { "score": 30.0, "sub_level": 2 },
+      "autonomy": { "score": 20.0, "sub_level": 1 }
+    },
+    "aggregate_score": 44.1,
+    "certification_level": 2,
+    "certification_label": "ACF-2: Middle School"
+  }
+]

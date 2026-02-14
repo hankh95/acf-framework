@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://acf-framework.dev/schemas/per-query-record.schema.json",
+  "title": "ACF Per-Query Record",
+  "description": "A detailed record for a single evaluation query, capturing input, output, and signal-level detail.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "record_type",
+    "system_id",
+    "system_version",
+    "experiment_id",
+    "query_id",
+    "timestamp",
+    "query",
+    "correct"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "record_type": {
+      "type": "string",
+      "const": "per-query-record"
+    },
+    "system_id": {
+      "type": "string"
+    },
+    "system_version": {
+      "type": "string"
+    },
+    "experiment_id": {
+      "type": "string"
+    },
+    "query_id": {
+      "type": "string",
+      "description": "Unique identifier for this query within the experiment."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "query": {
+      "type": "string",
+      "description": "The input query or prompt."
+    },
+    "expected_answer": {
+      "type": "string",
+      "description": "The expected correct answer (if known)."
+    },
+    "actual_answer": {
+      "type": "string",
+      "description": "The system's response."
+    },
+    "correct": {
+      "type": "boolean",
+      "description": "Whether the response was correct."
+    },
+    "latency_ms": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Response latency in milliseconds."
+    },
+    "domain": {
+      "type": "string",
+      "description": "Knowledge domain of the query."
+    },
+    "bloom_level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 6,
+      "description": "Bloom's taxonomy level (1=Remember through 6=Create)."
+    },
+    "measures": {
+      "type": "object",
+      "description": "Measure-specific values extracted from this query.",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "signals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source": { "type": "string" },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "value": {}
+        }
+      },
+      "description": "Signal-level detail from the system's processing pipeline."
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

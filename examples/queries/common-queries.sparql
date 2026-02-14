@@ -1,0 +1,84 @@
+# ACF Framework — Common SPARQL Queries
+# Run with: acf query "<sparql>"
+
+# ─── Dimension Queries ───────────────────────────────────────────────
+
+# List all dimensions with their weights
+SELECT ?id ?name ?weight WHERE {
+  ?d a acf:Dimension ; acf:id ?id ; rdfs:label ?name ; acf:weight ?weight .
+} ORDER BY ?id
+
+# Get sub-levels for a specific dimension
+SELECT ?level ?label ?scoreRange WHERE {
+  ?s a acf:SubLevel ;
+     acf:dimension <#Depth> ;
+     acf:level ?level ;
+     acf:label ?label ;
+     acf:scoreRange ?scoreRange .
+} ORDER BY ?level
+
+# ─── Measure Queries ─────────────────────────────────────────────────
+
+# Which measures cover the Depth dimension?
+SELECT ?id ?name WHERE {
+  ?m a acf:Measure ; acf:mapsTo <#Depth> ; acf:id ?id ; rdfs:label ?name .
+} ORDER BY ?id
+
+# Measures by collection method
+SELECT ?collection (COUNT(?m) AS ?count) WHERE {
+  ?m a acf:Measure ; acf:collection ?collection .
+} GROUP BY ?collection
+
+# Coverage matrix: measures per dimension
+SELECT ?dim (COUNT(?m) AS ?measureCount) WHERE {
+  ?m a acf:Measure ; acf:mapsTo ?dim .
+  ?dim a acf:Dimension .
+} GROUP BY ?dim ORDER BY ?measureCount
+
+# Dimensions with fewer than 4 measures (coverage gaps)
+SELECT ?dim ?name (COUNT(?m) AS ?count) WHERE {
+  ?dim a acf:Dimension ; rdfs:label ?name .
+  OPTIONAL { ?m a acf:Measure ; acf:mapsTo ?dim . }
+} GROUP BY ?dim ?name HAVING (COUNT(?m) < 4) ORDER BY ?count
+
+# ─── Hypothesis Queries ──────────────────────────────────────────────
+
+# List all hypotheses with targets
+SELECT ?id ?label ?target WHERE {
+  ?h a acf:Hypothesis ; acf:id ?id ; rdfs:label ?label ; acf:target ?target .
+} ORDER BY ?id
+
+# Hypotheses for a specific dimension
+SELECT ?id ?label WHERE {
+  ?h a acf:Hypothesis ; acf:id ?id ; rdfs:label ?label ; acf:dimension <#Autonomy> .
+}
+
+# ─── Level Queries ───────────────────────────────────────────────────
+
+# All certification levels with thresholds
+SELECT ?level ?label ?minScore ?equivalence WHERE {
+  ?l a acf:CertificationLevel ;
+     acf:level ?level ;
+     rdfs:label ?label ;
+     acf:minScore ?minScore ;
+     acf:equivalence ?equivalence .
+} ORDER BY ?level
+
+# ─── Data Queries (when data is loaded) ──────────────────────────────
+
+# Trend for a specific measure across versions
+SELECT ?version ?value WHERE {
+  ?r a acf:ExperimentRun ;
+     acf:measure <#M-003> ;
+     acf:systemVersion ?version ;
+     acf:value ?value .
+} ORDER BY ?version
+
+# All passing measurements
+SELECT ?measure ?value ?target WHERE {
+  ?r a acf:ExperimentRun ;
+     acf:measure ?measure ;
+     acf:value ?value ;
+     acf:target ?target ;
+     acf:pass true .
+}
