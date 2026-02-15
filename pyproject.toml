@@ -7,7 +7,7 @@ name = "acf-framework"
 version = "0.1.0"
 description = "Graph-based AGI Certification Framework: Measure AI understanding via human professional standards"
 readme = "README.md"
-license = "Apache-2.0"
+license = "MIT"
 requires-python = ">=3.10"
 authors = [
     { name = "Hank Hagedorn", email = "hank@conguent.systems" }
@@ -20,7 +20,7 @@ keywords = [
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: Apache Software License",
+    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",

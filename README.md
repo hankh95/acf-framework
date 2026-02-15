@@ -151,7 +151,7 @@ pip install -e ".[dev]"
 
 ## License
 
-Apache 2.0 — see [LICENSE](LICENSE).
+MIT — see [LICENSE](LICENSE).
 
 ## Citation
 
@@ -163,6 +163,6 @@ If you use the ACF framework in your research, please cite:
   author = {Conguent Systems PBC},
   year = {2026},
   url = {https://github.com/hankh95/acf-framework},
-  license = {Apache-2.0}
+  license = {MIT}
 }
 ```
