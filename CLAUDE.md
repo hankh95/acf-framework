@@ -32,11 +32,50 @@ pytest                    # Run tests
 acf info                  # Verify installation
 ```
 
-## Testing
+## Development Practices
 
-Run `pytest` before committing. Tests cover:
+### Branch + PR Pattern (Required)
+
+All implementation work goes through feature branches and pull requests:
+
+1. Create a feature branch: `git checkout -b feat-short-description`
+2. Do all implementation work on the branch — **never push directly to main**
+3. Run tests: `pytest`
+4. Push and create PR: `gh pr create`
+5. Get review from another developer/agent before merging
+
+After merge, clean up:
+```bash
+git branch -d feat-short-description
+git push origin --delete feat-short-description
+```
+
+### Testing
+
+Run `pytest` before committing. Tests must pass before creating a PR. Tests cover:
 - Graph loading from knowledge files
 - SPARQL queries
 - Scoring engine
 - Data validation
 - CLI commands
+
+### Code Quality
+
+- Always use type hints
+- Prefer editing existing files over creating new ones
+- Don't create files unless necessary
+- Knowledge belongs in Yurtle files (`knowledge/`), not Python code
+
+## Multi-Agent Coordination
+
+| Agent | GitHub | Platform |
+|-------|--------|----------|
+| **M5** | hankh95 | MacBook Pro M5 |
+| **DGX** | hankh959 | DGX Spark |
+| **Mini** | hankh1844 | Mac Mini M4 |
+
+## Related Projects
+
+- **nusy-product-team** — Uses ACF for being certification
+- **yurtle-rdflib** — RDF parsing library
+- **research** — Paper 122 (AGI Certification Framework)
