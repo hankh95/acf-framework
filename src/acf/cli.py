@@ -461,7 +461,7 @@ def score(data_path: str, system_id: str | None, as_json: bool, save: str | None
     console.print()
     console.print(f"  Aggregate Score: [bold cyan]{profile.aggregate_score:.1f}[/bold cyan]")
     console.print(f"  Certification:   [bold green]{profile.certification_level} — {profile.certification_label}[/bold green]")
-    console.print(f"  Dimensions scored: {len(dim_scores)}/9")
+    console.print(f"  Dimensions scored: {len(dim_scores)}/10")
     if unmapped:
         console.print(f"  [yellow]Unmapped measures: {', '.join(unmapped)}[/yellow]")
     console.print()

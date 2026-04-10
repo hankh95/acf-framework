@@ -1,5 +1,5 @@
 """
-ACF Scorer: Score AI systems across the 9 ACF dimensions.
+ACF Scorer: Score AI systems across the 10 ACF v1.1 dimensions.
 
 Each dimension has a scoring function that takes raw metrics and returns
 an ACFDimensionScore. The ACFScorer aggregates dimension scores into
@@ -13,14 +13,14 @@ from typing import Optional
 from acf.scoring.profile import ACFDimensionScore, ACFProfile
 
 
-# Bloom level to depth score mapping
+# Bloom level to depth score mapping (ACF v1.1 Section 5.4 midpoints)
 BLOOM_DEPTH_MAP = {
-    "L1": 17,   # Remember
-    "L2": 33,   # Understand
-    "L3": 50,   # Apply
-    "L4": 67,   # Analyze
-    "L5": 83,   # Evaluate
-    "L6": 100,  # Create
+    "L1": 10,   # Remember — base score 10
+    "L2": 25,   # Understand — base score 25
+    "L3": 45,   # Apply — base score 45
+    "L4": 55,   # Analyze — base score 55
+    "L5": 75,   # Evaluate — base score 75
+    "L6": 95,   # Create — base score 95
 }
 
 
@@ -280,6 +280,43 @@ def score_gba(
     return ACFDimensionScore(
         "gba", min(score, 100.0), sub_level,
         f"GBA1={gba1_calibration:.0%}, GBA2={gba2_ood_detection:.0%}",
+    )
+
+
+def score_action_capability(
+    procedure_execution_rate: float,
+    step_completion_rate: float,
+    answer_correctness_rate: float,
+) -> ACFDimensionScore:
+    """Score Action Capability (AC1-AC4).
+
+    New in ACF v1.1. Per Section 13.5:
+    AC_composite = PER x SCR x ACR x 100
+
+    procedure_execution_rate (PER): fraction of known procedures executable on novel input (0-1)
+    step_completion_rate (SCR): fraction of procedure steps completed correctly (0-1)
+    answer_correctness_rate (ACR): fraction producing correct final output (0-1)
+    """
+    composite = (procedure_execution_rate * step_completion_rate *
+                 answer_correctness_rate)
+    score = composite * 100.0
+
+    if score >= 75:
+        sub_level = "AC4"
+    elif score >= 60:
+        sub_level = "AC3"
+    elif score >= 30:
+        sub_level = "AC2"
+    elif score >= 15:
+        sub_level = "AC1"
+    elif composite > 0:
+        sub_level = "AC0"
+    else:
+        sub_level = "AC0"
+
+    return ACFDimensionScore(
+        "action_capability", min(score, 100.0), sub_level,
+        f"PER={procedure_execution_rate:.0%}, SCR={step_completion_rate:.0%}, ACR={answer_correctness_rate:.0%}",
     )
 
 

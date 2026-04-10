@@ -18,7 +18,7 @@ class TestCLIBasics:
     def test_version(self, runner):
         result = runner.invoke(main, ["--version"])
         assert result.exit_code == 0
-        assert "0.1.0" in result.output
+        assert "1.1.0" in result.output
 
     def test_help(self, runner):
         result = runner.invoke(main, ["--help"])
@@ -37,20 +37,20 @@ class TestDimensionsCommand:
         result = runner.invoke(main, ["dimensions", "--json-output"])
         assert result.exit_code == 0
         data = json.loads(result.output)
-        assert len(data) == 9
+        assert len(data) == 10
 
 
 class TestMeasuresCommand:
     def test_list_measures(self, runner):
         result = runner.invoke(main, ["measures"])
         assert result.exit_code == 0
-        assert "66 measures total" in result.output
+        assert "69 measures total" in result.output
 
     def test_measures_json(self, runner):
         result = runner.invoke(main, ["measures", "--json-output"])
         assert result.exit_code == 0
         data = json.loads(result.output)
-        assert len(data) == 66
+        assert len(data) == 69
 
 
 class TestLevelsCommand:
@@ -71,15 +71,15 @@ class TestInfoCommand:
     def test_info(self, runner):
         result = runner.invoke(main, ["info"])
         assert result.exit_code == 0
-        assert "Dimensions: 9" in result.output
+        assert "Dimensions: 10" in result.output
         assert "Measures:" in result.output
 
     def test_info_json(self, runner):
         result = runner.invoke(main, ["info", "--json-output"])
         assert result.exit_code == 0
         data = json.loads(result.output)
-        assert data["dimensions"] == 9
-        assert data["measures"] == 66
+        assert data["dimensions"] == 10
+        assert data["measures"] == 69
 
 
 class TestQueryCommand:
@@ -89,7 +89,7 @@ class TestQueryCommand:
             "SELECT ?id WHERE { ?s a acf:Dimension ; acf:id ?id . }",
         ])
         assert result.exit_code == 0
-        assert "9 results" in result.output
+        assert "10 results" in result.output
 
     def test_empty_query(self, runner):
         result = runner.invoke(main, [

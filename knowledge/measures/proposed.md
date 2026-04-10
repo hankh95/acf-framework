@@ -77,6 +77,44 @@
     acf:targetVersion "v1" ;
     acf:mapsToDimension <#ServiceOrientation> .
 
+# --- ACTION CAPABILITY (ACF v1.1) ---
+
+<#M-067> a acf:Measure ;
+    acf:id "M-067" ;
+    acf:name "procedure_execution_rate" ;
+    rdfs:label "Procedure Execution Rate (PER)" ;
+    acf:description "Fraction of known procedures that can be executed on novel input. PER = procedures attempted / procedures in knowledge." ;
+    acf:unit "percent" ;
+    acf:dataType xsd:decimal ;
+    acf:collection "automated" ;
+    acf:priority "high" ;
+    acf:targetVersion "v1.1" ;
+    acf:mapsToDimension <#ActionCapability> .
+
+<#M-068> a acf:Measure ;
+    acf:id "M-068" ;
+    acf:name "step_completion_rate" ;
+    rdfs:label "Step Completion Rate (SCR)" ;
+    acf:description "Fraction of procedure steps completed correctly. SCR = steps correct / steps attempted." ;
+    acf:unit "percent" ;
+    acf:dataType xsd:decimal ;
+    acf:collection "automated" ;
+    acf:priority "high" ;
+    acf:targetVersion "v1.1" ;
+    acf:mapsToDimension <#ActionCapability> .
+
+<#M-069> a acf:Measure ;
+    acf:id "M-069" ;
+    acf:name "answer_correctness_rate" ;
+    rdfs:label "Answer Correctness Rate (ACR)" ;
+    acf:description "Fraction of executed procedures producing correct final output. ACR = correct outputs / procedures completed." ;
+    acf:unit "percent" ;
+    acf:dataType xsd:decimal ;
+    acf:collection "automated" ;
+    acf:priority "high" ;
+    acf:targetVersion "v1.1" ;
+    acf:mapsToDimension <#ActionCapability> .
+
 # --- MEDIUM PRIORITY (ACF v2) ---
 
 <#M-062> a acf:Measure ;
@@ -143,7 +181,7 @@
 # Proposed Measures: M-056 through M-066
 
 **Status:** Proposed -- pending validation and implementation
-**Source:** ACF gap analysis of original 55 measures (M-001 through M-055) against the 9 ACF dimensions
+**Source:** ACF gap analysis of original 55 measures (M-001 through M-055) against the 10 ACF dimensions
 
 ## Origin and Rationale
 
@@ -381,6 +419,7 @@ The following table shows which ACF dimensions these proposed measures address:
 | Autonomy | M-065, M-066 | Medium |
 | Factual Grounding | -- (adequate existing coverage) | -- |
 | Knowledge Transparency | -- (adequate existing coverage) | -- |
+| **Action Capability** | **M-067, M-068, M-069** | **High (v1.1)** |
 
 ## Implementation Notes
 

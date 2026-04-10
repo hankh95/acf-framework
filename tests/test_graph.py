@@ -49,9 +49,9 @@ class TestGraphLoading:
 class TestDimensions:
     """Test dimension loading and querying."""
 
-    def test_nine_dimensions(self, graph):
+    def test_ten_dimensions(self, graph):
         dims = graph.dimensions()
-        assert len(dims) == 9
+        assert len(dims) == 10
 
     def test_dimension_ids(self, graph):
         dims = graph.dimensions()
@@ -60,6 +60,7 @@ class TestDimensions:
             "breadth", "depth", "formal-reasoning", "factual-grounding",
             "compositional-generalization", "knowledge-transparency",
             "service-orientation", "generalization-boundary", "autonomy",
+            "action_capability",
         }
         assert ids == expected
 
@@ -85,9 +86,9 @@ class TestDimensions:
 class TestMeasures:
     """Test measure loading and querying."""
 
-    def test_sixty_six_measures(self, graph):
+    def test_sixty_nine_measures(self, graph):
         ms = graph.measures()
-        assert len(ms) == 66
+        assert len(ms) == 69
 
     def test_measures_have_ids(self, graph):
         ms = graph.measures()
@@ -97,7 +98,9 @@ class TestMeasures:
         assert "M-003" in ids  # Hallucination Rate
         assert "M-036" in ids  # Y-layer population
         assert "M-058" in ids  # Bloom Level Profile (proposed)
-        assert "M-066" in ids  # Self-Correction Rate (last)
+        assert "M-066" in ids  # Self-Correction Rate
+        assert "M-067" in ids  # Procedure Execution Rate (AC v1.1)
+        assert "M-069" in ids  # Answer Correctness Rate (AC v1.1)
 
     def test_measures_have_dimension_mappings(self, graph):
         ms = graph.measures()
@@ -165,7 +168,7 @@ class TestSPARQL:
                 ?s a acf:Dimension ; acf:id ?id .
             }
         """)
-        assert len(results) == 9
+        assert len(results) == 10
 
     def test_query_with_filter(self, graph):
         results = graph.query("""
