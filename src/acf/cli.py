@@ -553,5 +553,92 @@ def info(as_json: bool):
     console.print(f"  Hypotheses: {stats['hypotheses']}")
 
 
+@main.group()
+def batteries():
+    """Inspect and load the bundled NeSy battery datasets (FR-36, Zorblaxia, CG-100).
+
+    These commands surface the JSONL items and methodology docs shipped under
+    `batteries/<name>/`. They do NOT score a system — scoring is per-platform
+    and documented in each battery's `methodology.md`. The Python helper
+    `acf.batteries.load_battery(name)` returns the items as dicts; implement
+    the `acf.batteries.BatteryRunner` Protocol for your own system to evaluate.
+    """
+    pass
+
+
+@batteries.command("list")
+@click.option("--json-output", "as_json", is_flag=True, help="Output as JSON")
+def batteries_list(as_json: bool):
+    """List the batteries shipped in this distribution."""
+    from acf.batteries import list_batteries, load_battery
+
+    found = list_batteries()
+    summary = []
+    for name in found:
+        items = load_battery(name)
+        summary.append({"name": name, "n_items": len(items)})
+
+    if as_json:
+        click.echo(json.dumps(summary, indent=2))
+        return
+
+    table = Table(title="ACF Batteries")
+    table.add_column("Name", style="bold cyan")
+    table.add_column("Items", justify="right")
+    table.add_column("Methodology", style="dim")
+    for row in summary:
+        table.add_row(
+            row["name"],
+            str(row["n_items"]),
+            f"batteries/{row['name']}/{row['name']}-methodology.md",
+        )
+    console.print(table)
+
+
+@batteries.command("inspect")
+@click.argument("name")
+@click.option("--limit", type=int, default=3, help="How many items to print")
+@click.option("--json-output", "as_json", is_flag=True, help="Output as JSON")
+def batteries_inspect(name: str, limit: int, as_json: bool):
+    """Print the first N items of a named battery."""
+    from acf.batteries import load_battery
+
+    try:
+        items = load_battery(name)
+    except (ValueError, FileNotFoundError) as e:
+        console.print(f"[red]{e}[/red]")
+        sys.exit(1)
+
+    sample = items[:limit]
+    if as_json:
+        click.echo(json.dumps(sample, indent=2))
+        return
+
+    for item in sample:
+        console.print(f"[bold]{item.get('id', '?')}[/bold] ({item.get('battery', '?')})")
+        for k, v in item.items():
+            if k in ("id", "battery"):
+                continue
+            console.print(f"  {k}: {v}")
+        console.print()
+
+
+@batteries.command("methodology")
+@click.argument("name")
+def batteries_methodology(name: str):
+    """Print the methodology document for a named battery."""
+    from acf.batteries import battery_methodology_path
+
+    try:
+        path = battery_methodology_path(name)
+    except ValueError as e:
+        console.print(f"[red]{e}[/red]")
+        sys.exit(1)
+    if not path.is_file():
+        console.print(f"[red]Methodology doc not found: {path}[/red]")
+        sys.exit(1)
+    click.echo(path.read_text(encoding="utf-8"))
+
+
 if __name__ == "__main__":
     main()
