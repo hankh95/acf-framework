@@ -65,7 +65,13 @@ domains the model overreaches into.
 Total of 36 was chosen to balance signal versus runtime when scored against
 many model + adapter combinations.
 
-## 4. Scoring procedure
+## 4. Reference scoring procedure (graph-backed systems)
+
+> **Scope.** This is the scoring procedure for systems that expose a queryable
+> knowledge graph and rule-firing trace (i.e. neurosymbolic systems of Kautz
+> Type II–V). It scores graph-shape evidence — rule counts, type diversity,
+> chain depth — not the literal natural-language answer to each question. For
+> opaque LLM systems, see §4b.
 
 The reference implementation is `scripts/run_fr_benchmark.py` in the
 nusy-product-team repo. In plain English, the steps are:
@@ -101,6 +107,34 @@ nusy-product-team repo. In plain English, the steps are:
    producing a 0–100 ACF score and a sub-level label.
 
 The FR dimension passes the H122.8 target if the ACF score is ≥ 40.
+
+## 4b. Adapted scoring procedure (LLM systems)
+
+LLM systems do not expose the graph structure that §4 inspects. The adapted
+procedure scores the system's natural-language response per item:
+
+1. **Send each question** to the LLM with the prompt suffix *"Provide your
+   reasoning step by step, then state your conclusion."* Capture the response.
+2. **Apply an LLM-judge call** with the prompt: *"Does the response correctly
+   answer the question? Output JSON: {correct: true|false, reasoning_present:
+   true|false, chain_steps: <int>}."* The judge can be the same LLM under
+   test (with the limitations that implies — see Paper 122 §5.3).
+3. **Map judge outputs to per-level scores**:
+   - FR1: per-item correctness; aggregate to FR1 accuracy.
+   - FR2: per-item correctness AND `chain_steps ≥ 2`; aggregate.
+   - FR-boundary: per-item correct refusal (judge prompt: *"Did the model
+     refuse to perform the formal task and explain why?"*); aggregate.
+4. **Aggregate to the FR dimension** on the same 0–100 scale as §4.
+
+The reference scoring code for the LLM path is **not bundled in
+acf-framework v1.1.0**; the procedure above is sufficient to implement
+against any chat-completions API. A turn-key runner is tracked as future work.
+
+**Cross-paradigm comparability.** Per Paper 122 §5.3, FR scores produced by
+§4 (graph-backed) and §4b (LLM) are reported on a unified [0, 100] scale but
+are *not directly numerically comparable*. The cross-paradigm interpretation
+is qualitative: a system's *position on the dimension* is meaningful, not the
+absolute number when compared to a system from a different paradigm.
 
 ## 5. Known limitations
 

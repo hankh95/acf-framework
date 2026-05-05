@@ -73,7 +73,13 @@ that is where systems most often fail in interesting ways — fully lexical
 items are usually solved by string-pattern templates, and fully productive
 items are often refused by everything.
 
-## 4. Scoring procedure
+## 4. Reference scoring procedure (graph-backed systems)
+
+> **Scope.** This procedure scores graph-shape evidence — predicate diversity,
+> multi-hop ratio, chain depth, Y-layer compositional predicate coverage —
+> not the literal natural-language answer to each question. Appropriate for
+> neurosymbolic systems that expose a queryable knowledge graph. For LLM
+> systems, see §4b.
 
 The reference implementation is `scripts/run_cg_benchmark.py` in the
 nusy-product-team repo. In plain English:
@@ -112,6 +118,29 @@ nusy-product-team repo. In plain English:
    breakdowns.
 
 H122.7 passes when overall CG accuracy is ≥ 80 %.
+
+## 4b. Adapted scoring procedure (LLM systems)
+
+LLM systems do not expose the graph structure that §4 inspects. The adapted
+procedure is:
+
+1. **Send each question** to the LLM with the prompt suffix *"Provide your
+   answer and your reasoning."* Capture the response.
+2. **Apply an LLM-judge call**: *"Does the response demonstrate compositional
+   reasoning that addresses the question? Output JSON: {answer_addresses_question:
+   true|false, composition_evidence: 'none'|'lexical'|'structural'|'productive'}."*
+3. **Map judge outputs to per-level scores**:
+   - **CG1** (lexical): per-item correctness aggregated.
+   - **CG2** (structural): per-item correctness AND `composition_evidence ∈
+     {structural, productive}` aggregated.
+   - **CG3** (productive): per-item correctness AND `composition_evidence =
+     productive` aggregated.
+4. **Aggregate to the CG dimension** on the same 0–100 scale as §4.
+
+Reference code for the LLM path is **not bundled in v1.1.0**; the procedure
+above implements against any chat-completions API. **Cross-paradigm scores
+are reported on a unified scale but are not directly numerically comparable**
+— see Paper 122 §5.3.
 
 ## 5. Known limitations
 
