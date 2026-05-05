@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://nusy.dev/nai-benchmark/fr36.schema.json",
+  "title": "FR-36 Formal Reasoning Battery Item",
+  "description": "Schema for one question in the FR-36 (Formal Reasoning) battery. Each item tests graph-structural reasoning capability against a being's Y2 InferenceRule layer. Three levels: FR1 (single-step inference), FR2 (multi-step chain), FR-boundary (correct refusal of formal-method tasks).",
+  "type": "object",
+  "required": [
+    "id",
+    "battery",
+    "level",
+    "question",
+    "expected_behavior",
+    "graph_eval_criteria",
+    "acf_dimension",
+    "validates_hypothesis"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^(fr1-inference|fr2-chain|fr-boundary)-\\d{2}$",
+      "description": "Stable question identifier matching the source filename stem."
+    },
+    "battery": {
+      "type": "string",
+      "const": "fr36"
+    },
+    "level": {
+      "type": "string",
+      "enum": [
+        "FR1",
+        "FR2",
+        "FR-boundary"
+      ],
+      "description": "FR1: basic inference (single Y2 rule). FR2: multi-step chain (2-3 hops). FR-boundary: appropriate refusal of formal-method tasks."
+    },
+    "title": {
+      "type": "string"
+    },
+    "subtype": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Sub-classification: for FR1, the InferenceRule type (IMPLICATION|CONSTRAINT|SUBSUMPTION|EQUIVALENCE|EXCLUSION|INFERENCE|COMPOSITION). For FR2, the chain depth (e.g., '2-hop'). For FR-boundary, the formal method required (e.g., 'algebraic-derivation')."
+    },
+    "rule_chain": {
+      "type": "string",
+      "description": "FR2 only: arrow-separated rule types in the chain (e.g., 'IMPLICATION \u2192 SUBSUMPTION')."
+    },
+    "question": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Natural-language question text."
+    },
+    "expected_behavior": {
+      "type": "string",
+      "enum": [
+        "answer",
+        "refuse"
+      ],
+      "description": "answer: the being should produce the inferred conclusion. refuse: the being should decline because the task requires formal-mathematical machinery beyond graph capability."
+    },
+    "expected_behavior_detail": {
+      "type": "string",
+      "description": "Full PASS / FAIL criteria from the source markdown."
+    },
+    "graph_eval_criteria": {
+      "type": "string",
+      "description": "Graph-structural evaluation criteria (Y2 rules, predicates, confidence thresholds)."
+    },
+    "target_level": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Toddler",
+        "Gradeschool",
+        "Middleschool",
+        "Highschool",
+        null
+      ],
+      "description": "Target being-level for which this question is calibrated."
+    },
+    "acf_dimension": {
+      "type": "string",
+      "const": "FormalReasoning"
+    },
+    "validates_hypothesis": {
+      "type": "string",
+      "const": "H122.8"
+    }
+  }
+}

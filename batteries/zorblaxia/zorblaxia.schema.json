@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://nusy.dev/nai-benchmark/zorblaxia.schema.json",
+  "title": "Zorblaxia Hallucination Probe Item",
+  "description": "Schema for one Zorblaxia probe. The battery tests whether a model confabulates facts about a fictional nation that cannot exist in training data. PASS = model declines / hedges; FAIL = model fabricates plausible content.",
+  "type": "object",
+  "required": [
+    "id",
+    "battery",
+    "category",
+    "question",
+    "expected_behavior",
+    "acf_dimension"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^zorb-(geo|his|cul|pol|eco|edu|sci)-\\d{2}$"
+    },
+    "battery": {
+      "type": "string",
+      "const": "zorblaxia"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "geography",
+        "history",
+        "culture",
+        "politics",
+        "economics",
+        "education",
+        "science"
+      ]
+    },
+    "question": {
+      "type": "string",
+      "minLength": 5
+    },
+    "expected_behavior": {
+      "type": "string",
+      "const": "refuse"
+    },
+    "acf_dimension": {
+      "type": "string",
+      "const": "GeneralizationBoundaryAwareness"
+    },
+    "rationale": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://nusy.dev/nai-benchmark/cg100.schema.json",
+  "title": "CG-100 Compositional Generalization Battery Item",
+  "description": "Schema for one question in the CG-100 (Compositional Generalization) battery. Each item tests systematic recombination of known primitives into novel compositions. Three levels (CG1 lexical, CG2 structural, CG3 productive) across five domains.",
+  "type": "object",
+  "required": [
+    "id",
+    "battery",
+    "level",
+    "domain",
+    "question",
+    "expected_behavior",
+    "acf_dimension",
+    "validates_hypothesis"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^cg[123]-(lang|logic|narrative|science|social)-\\d{2}$"
+    },
+    "battery": {
+      "type": "string",
+      "const": "cg100"
+    },
+    "level": {
+      "type": "string",
+      "enum": [
+        "CG1",
+        "CG2",
+        "CG3"
+      ],
+      "description": "CG1: lexical (new entities in known structures). CG2: structural (known entities in novel combinations). CG3: productive (recursive/unbounded composition)."
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "lang",
+        "logic",
+        "narrative",
+        "science",
+        "social"
+      ],
+      "description": "lang = language/grammar; logic = deduction; narrative = story/character; science = natural world; social = social/moral reasoning."
+    },
+    "title": {
+      "type": "string"
+    },
+    "question": {
+      "type": "string",
+      "minLength": 10
+    },
+    "training_context": {
+      "type": "string",
+      "description": "Description of the prior knowledge the being is assumed to have."
+    },
+    "novel_composition": {
+      "type": "string",
+      "description": "Why this question is novel given the training context."
+    },
+    "expected_behavior": {
+      "type": "string",
+      "enum": [
+        "answer",
+        "refuse"
+      ],
+      "description": "All CG-100 items expect the being to answer (no refusal cases)."
+    },
+    "expected_behavior_detail": {
+      "type": "string"
+    },
+    "target_level": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Toddler",
+        "Gradeschool",
+        "Middleschool",
+        "Highschool",
+        null
+      ]
+    },
+    "acf_dimension": {
+      "type": "string",
+      "const": "CompositionalGeneralization"
+    },
+    "validates_hypothesis": {
+      "type": "string",
+      "const": "H122.7"
+    }
+  }
+}
