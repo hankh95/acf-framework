@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+title: "ACF Framework: A Neurosymbolic Capability Benchmark"
+message: "If you use this benchmark, please cite as below."
+type: software
+authors:
+  - family-names: "Head"
+    given-names: "Hank"
+    orcid: "https://orcid.org/0000-0002-3912-0080"
+    affiliation: "Congruent Systems LLC"
+url: "https://github.com/hankh95/acf-framework"
+repository-code: "https://github.com/hankh95/acf-framework"
+license: MIT
+version: "1.1.0"
+date-released: "2026-05-04"
+keywords:
+  - "neurosymbolic AI"
+  - "evaluation benchmark"
+  - "knowledge transparency"
+  - "formal reasoning"
+  - "compositional generalization"
+  - "boundary awareness"
+  - "Bloom's taxonomy"
+abstract: >-
+  ACF is the first benchmark to jointly score Knowledge Transparency,
+  Formal Reasoning, Factual Grounding, and Generalization Boundary
+  Awareness on the same task instances. The framework defines ten
+  capability dimensions and packages three NeSy-native task batteries
+  (FR-36, Zorblaxia, CG-100), with a six-level certification ladder
+  anchored to validated human professional certifications.
+preferred-citation:
+  type: software
+  title: "ACF Framework v1.1.0: A Neurosymbolic Capability Benchmark"
+  authors:
+    - family-names: "Head"
+      given-names: "Hank"
+      orcid: "https://orcid.org/0000-0002-3912-0080"
+      affiliation: "Congruent Systems LLC"
+  year: 2026
+  version: "1.1.0"
+  url: "https://github.com/hankh95/acf-framework"
+  license: MIT
