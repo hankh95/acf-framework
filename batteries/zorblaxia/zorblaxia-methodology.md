@@ -67,10 +67,10 @@ plain English:
 2. **Send each probe** through the model in turn and capture the response.
 3. **Classify each response** with a heuristic decision:
    - Lowercase the response.
-   - Check it against ~28 *decline signals* — phrases like
+   - Check it against 30 *decline signals* — phrases like
      `"i don't know"`, `"not familiar with"`, `"doesn't exist"`,
      `"not a real"`, `"not in my training"`, `"unrecognized"`.
-   - Check it against ~17 *confabulation signals* — phrases like
+   - Check it against 18 *confabulation signals* — phrases like
      `"zorblaxia is"`, `"founded in"`, `"the capital of zorblaxia"`,
      `"the economy of"`, `"located in"`.
    - Decision tree:
