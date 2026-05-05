@@ -47,7 +47,7 @@ ACF was designed to surface capabilities that LLM-only benchmarks (MMLU, HellaSw
 |---|---|---|
 | **Knowledge Transparency (KT)** | Output text only | Whether the answer is traceable to a queryable knowledge structure (rule-firing trace, provenance to source) |
 | **Formal Reasoning (FR)** | Final-answer correctness | The reasoning chain itself — graph-structural evidence of multi-step deduction |
-| **Factual Grounding (FG)** | Whether the claim happens to be true | Whether each claim has source attribution, calibrated confidence, and zero fabrication |
+| **Factual Grounding (FG)** | Whether the claim happens to be true | Whether each claim has source attribution and calibrated confidence; FG4 (the strictest sub-level) targets fabrication resistance, but real systems typically reach FG2–FG3 in practice (see Zorblaxia results in Paper 122 §6 for the honest cross-paradigm picture) |
 | **Generalization Boundary Awareness (GBA)** | Refusal rate on a separate benchmark | Per-item adversarial signal via the Zorblaxia battery — domain-adjacent fictional terms that demand refusal |
 
 These four dimensions are jointly reported on the same task instances, which is the primary contribution of ACF as a benchmark (see Paper 122 for related work positioning vs HELM, PrOntoQA, FOLIO, CLEVR-Hans, and R-Tuning).
@@ -165,9 +165,11 @@ pip install -e ".[dev]"
 
 ## Honest Limitations
 
-The framework is open-source and usable today, but a few caveats matter for anyone considering ACF as an evaluation reference:
+The framework is open-source and usable today, but several caveats matter for anyone considering ACF as an evaluation reference:
 
 - **Zero third-party adoption to date.** Every reported result comes from the author's own neurosymbolic platform. Cross-paradigm baselines (LLMs, classical expert systems) are in progress but not yet reproduced by independent evaluators.
+- **Reference scoring for FR-36 and CG-100 is graph-structural, not answer-grading.** The reference scoring procedure measures structural properties of the system's reasoning trace (number and diversity of inference rules, chain depth, predicate diversity) and assigns pass/fail by sorting items in a stable order and passing the top N according to a rate computed from those metrics. This means the reference scorer is appropriate for graph-backed (neurosymbolic) systems that expose a rule-firing trace; LLM evaluation requires an adapted scoring path (LLM-judge or human-judge) which is outside the scope of the v1.1.0 reference scorer. See Paper 122 §5 and the per-battery methodology docs for the full procedure.
+- **Zorblaxia uses heuristic response classification on 10 items.** Decline / Hedged / Confabulated classification matches 29 decline-signal patterns and 18 confabulation-signal patterns in the response text; the 80% decline-rate pass threshold is operational, not validated against human raters. Sample size and threshold calibration are explicit future work.
 - **H122.1 (Breadth-Depth orthogonality) was rejected.** Across 7 evaluated systems, Breadth and Depth show a moderate inverse correlation (r = -0.434), not the expected near-independence (|r| < 0.3). The framework continues to treat the dimensions as **independently measurable** rather than statistically independent — see Paper 122 for the discussion of this finding.
 - **No human-rater validation of Bloom-level scoring.** Bloom L1-L6 classification is automated. An inter-annotator agreement study is planned future work.
 - **Novel batteries (Zorblaxia) lack comparable published precedent.** Zorblaxia is positioned as a contribution of this framework, not as a replication of an existing test.
