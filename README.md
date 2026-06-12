@@ -7,7 +7,10 @@ The AGI Certification Framework (ACF) provides a rigorous, multi-dimensional sco
 ## Quick Start
 
 ```bash
-pip install acf-framework
+# Not yet on PyPI — install from source:
+git clone https://github.com/hankh95/acf-framework.git
+cd acf-framework
+pip install -e .
 
 # Explore the framework
 acf dimensions              # List all 10 ACF dimensions
