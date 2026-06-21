@@ -18,7 +18,7 @@
     rdfs:label "Inference Coherence" ;
     acf:id "M-048" ;
     acf:name "inference_coherence" ;
-    acf:description "Percentage of inferred knowledge items that are logically consistent with their supporting facts and relationships. Evaluates whether the reasoning layer produces valid conclusions from its premises." ;
+    acf:description "Percentage of facts with epistemic status Derived (i.e. inferred from other facts and relationships -- an epistemic-status property of a fact, not a Y-layer) that are logically consistent with their supporting premises. Evaluates whether the system produces valid conclusions from its premises. Computed over derived facts wherever they sit in the graph, decoupled from layer numbering." ;
     acf:unit "percent" ;
     acf:dataType "decimal" ;
     acf:category "y-layer-quality" ;
@@ -88,9 +88,9 @@ Evaluates the factual accuracy of Y1 extracted facts by comparing them against s
 
 ### M-048: Inference Coherence
 
-Assesses whether Y3 inferred knowledge follows logically from its supporting Y1 facts and Y2 relationships. An LLM grader examines each inference alongside its premises and determines whether the conclusion is logically valid, plausible but unsupported, or contradicted by the evidence.
+Assesses whether **derived** facts -- those carrying epistemic status `Derived` (inferred from other facts and relationships) -- follow logically from their supporting premises. Inference is an **epistemic-status property of a fact, not a Y-layer**, so this measure ranges over all derived facts wherever they sit in the graph, decoupled from layer numbering. An LLM grader examines each derived fact alongside its premises and determines whether the conclusion is logically valid, plausible but unsupported, or contradicted by the evidence.
 
-**Collection**: Sample inferences from Y3, retrieve their provenance chains (the facts and relationships they were derived from), submit to an LLM evaluator. Compute the percentage of inferences rated as logically coherent.
+**Collection**: Sample facts with `epistemic_status = Derived`, retrieve their provenance chains (the facts and relationships they were derived from), submit to an LLM evaluator. Compute the percentage of derived facts rated as logically coherent.
 
 **Target**: Greater than 90%. Incoherent inferences propagate errors upward and undermine trust in the reasoning layer.
 
@@ -131,7 +131,7 @@ Checks the structural health of the knowledge graph by verifying that all cross-
 Quality measures connect to the ACF dimensions that care most about correctness and trustworthiness:
 
 - **Fact Correctness Rate** directly measures **Factual Grounding** -- are claims tied to verifiable truth?
-- **Inference Coherence** reflects **Formal Reasoning** (logical validity) and **Depth** (quality of synthesis).
+- **Inference Coherence** reflects **Formal Reasoning** (logical validity) and **Depth** (quality of synthesis) -- assessed over derived (inferred) facts as an epistemic-status property, not a Y-layer.
 - **Procedure Validity** maps to **Autonomy** -- can the system reliably execute its learned skills?
 - **Metacognition Accuracy** is the core indicator for **Generalization Boundary Awareness** -- does the system accurately know what it knows and does not know?
 - **Knowledge Freshness** supports **Breadth** -- stale knowledge effectively reduces coverage.
