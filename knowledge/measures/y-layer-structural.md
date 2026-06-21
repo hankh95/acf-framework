@@ -47,7 +47,7 @@ These measures address a fundamental concern: a knowledge system can have health
 
 ### M-053: Cross-Layer Provenance
 
-Provenance is the chain of evidence from a knowledge item back to its original source. In a well-structured system, a Y3 inference should trace back through the Y2 relationships and Y1 facts it was derived from, all the way down to the Y0 source documents. Cross-layer provenance measures what percentage of higher-layer items have this complete chain.
+Provenance is the chain of evidence from a knowledge item back to its original source. In a well-structured system, a derived (inferred) fact should trace back through the Y2 relationships and Y1 facts it was derived from, all the way down to the Y0 source documents. Cross-layer provenance measures what percentage of higher-layer items have this complete chain.
 
 **Collection**: For each knowledge item in Y1 through Y6, walk its provenance chain downward toward Y0. An item has complete provenance if every link in the chain resolves to a valid item in the layer below, terminating at a Y0 source document. Compute the percentage of items with complete provenance.
 
