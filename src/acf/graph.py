@@ -17,10 +17,11 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from rdflib import Graph, Literal, Namespace
 from rdflib.namespace import RDF, RDFS, XSD
+from rdflib.query import ResultRow
 
 import yurtle_rdflib
 
@@ -207,9 +208,18 @@ class ACFGraph:
 
     # ── Typed Accessors (SPARQL-backed) ──────────────────────────
 
+    def _select(self, sparql: str) -> list[ResultRow]:
+        """Run a SELECT query and return its rows, narrowed to ``ResultRow``.
+
+        rdflib's ``Graph.query`` is typed as a union over SELECT / ASK /
+        CONSTRUCT results; every accessor below issues a SELECT, so narrow the
+        rows once here rather than at each field access.
+        """
+        return [cast(ResultRow, row) for row in self.graph.query(sparql)]
+
     def dimensions(self) -> list[Dimension]:
         """Return all ACF dimensions."""
-        results = self.graph.query("""
+        results = self._select("""
             SELECT ?id ?label ?shortName ?subLevelCount ?weight ?desc WHERE {
                 ?s a acf:Dimension .
                 ?s acf:id ?id .
@@ -246,7 +256,7 @@ class ACFGraph:
         if dimension_id:
             filter_clause = f'FILTER(STR(?dimId) = "{dimension_id}")'
 
-        results = self.graph.query(f"""
+        results = self._select(f"""
             SELECT ?id ?dimId ?level ?label ?scoreRange ?desc WHERE {{
                 ?s a acf:SubLevel .
                 ?s acf:id ?id .
@@ -278,7 +288,7 @@ class ACFGraph:
         if dimension:
             filter_clause = f'FILTER(STR(?dimId) = "{dimension}")'
 
-        results = self.graph.query(f"""
+        results = self._select(f"""
             SELECT ?id ?name ?unit ?collection ?desc WHERE {{
                 ?s a acf:Measure .
                 ?s acf:id ?id .
@@ -309,7 +319,7 @@ class ACFGraph:
                 )
 
         # Fetch dimension mappings for all measures
-        dim_results = self.graph.query("""
+        dim_results = self._select("""
             SELECT ?measId ?dimId WHERE {
                 ?s a acf:Measure .
                 ?s acf:id ?measId .
@@ -333,7 +343,7 @@ class ACFGraph:
 
     def levels(self) -> list[CertificationLevel]:
         """Return all certification levels."""
-        results = self.graph.query("""
+        results = self._select("""
             SELECT ?id ?label ?scoreMin ?scoreMax ?humanEquiv WHERE {
                 ?s a acf:CertificationLevel .
                 ?s acf:id ?id .
@@ -357,7 +367,7 @@ class ACFGraph:
 
     def hypotheses(self) -> list[Hypothesis]:
         """Return all hypotheses."""
-        results = self.graph.query("""
+        results = self._select("""
             SELECT ?id ?desc ?target ?status WHERE {
                 ?s a acf:Hypothesis .
                 ?s acf:id ?id .
@@ -379,7 +389,7 @@ class ACFGraph:
 
     def data_series(self, measure_id: str) -> list[DataPoint]:
         """Return all data points for a given measure."""
-        results = self.graph.query(f"""
+        results = self._select(f"""
             SELECT ?value ?sysId ?sysVer ?expId ?ts WHERE {{
                 ?s acf:measure acf:{measure_id} .
                 OPTIONAL {{ ?s acf:value ?value }}
@@ -405,9 +415,11 @@ class ACFGraph:
     def query(self, sparql: str) -> list[dict[str, Any]]:
         """Run an arbitrary SPARQL query and return results as dicts."""
         results = self.graph.query(sparql)
+        variables = results.vars or []
+        rows = [cast(ResultRow, row) for row in results]
         return [
-            {str(var): str(row[var]) for var in results.vars if row[var] is not None}
-            for row in results
+            {str(var): str(row[var]) for var in variables if row[var] is not None}
+            for row in rows
         ]
 
     def triple_count(self) -> int:
