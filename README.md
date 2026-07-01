@@ -177,6 +177,14 @@ The framework is open-source and usable today, but several caveats matter for an
 - **No human-rater validation of Bloom-level scoring.** Bloom L1-L6 classification is automated. An inter-annotator agreement study is planned future work.
 - **Novel batteries (Zorblaxia) lack comparable published precedent.** Zorblaxia is positioned as a contribution of this framework, not as a replication of an existing test.
 
+## Ecosystem
+
+Part of the open-source stack behind [Congruent Systems](https://congruentsys.com):
+
+- **[nusy-reasoners](https://github.com/Congruentsys/nusy-reasoners)** — proof-carrying reasoning engines over Apache Arrow: derivations you can audit, abstention you can trust.
+- **[nusy-kanban](https://github.com/hankh95/nusy-kanban)** — Arrow-native, distributed kanban for multi-agent teams, with a built-in Hypothesis-Driven-Development research workflow.
+- **[noesis-ship](https://github.com/hankh95/noesis-ship)** — pluggable multi-agent communication platform on NATS (EventBus, KV, object store).
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
