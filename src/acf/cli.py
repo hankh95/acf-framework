@@ -335,7 +335,7 @@ def score(data_path: str, system_id: str | None, as_json: bool, save: str | None
         return
 
     # Auto-detect system_id from most common
-    detected_systems = {}
+    detected_systems: dict[str, int] = {}
     for r in records:
         detected_systems[r["system_id"]] = detected_systems.get(r["system_id"], 0) + 1
 
@@ -345,7 +345,7 @@ def score(data_path: str, system_id: str | None, as_json: bool, save: str | None
             console.print("[dim]Multiple systems found in data:[/dim]")
             for sid, cnt in sorted(detected_systems.items(), key=lambda x: -x[1]):
                 console.print(f"  {sid}: {cnt} records")
-            system_id = max(detected_systems, key=detected_systems.get)
+            system_id = max(detected_systems, key=lambda s: detected_systems[s])
             console.print(f"[dim]Using: {system_id} (use --system to override)[/dim]\n")
             records = [r for r in records if r["system_id"] == system_id]
         else:
@@ -587,7 +587,7 @@ def batteries_list(as_json: bool):
     table.add_column("Methodology", style="dim")
     for row in summary:
         table.add_row(
-            row["name"],
+            str(row["name"]),
             str(row["n_items"]),
             f"batteries/{row['name']}/{row['name']}-methodology.md",
         )
