@@ -8,7 +8,6 @@ a complete ACFProfile with certification level.
 
 from __future__ import annotations
 
-from typing import Optional
 
 from acf.scoring.profile import ACFDimensionScore, ACFProfile
 
