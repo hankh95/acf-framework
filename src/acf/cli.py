@@ -144,7 +144,7 @@ def levels(as_json: bool):
         return
 
     if as_json:
-        click.echo(json.dumps([l.__dict__ for l in lvls], indent=2))
+        click.echo(json.dumps([lvl.__dict__ for lvl in lvls], indent=2))
         return
 
     table = Table(title="ACF Certification Levels")
@@ -153,11 +153,11 @@ def levels(as_json: bool):
     table.add_column("Score Range", justify="right")
     table.add_column("Human Equivalent")
 
-    for l in lvls:
+    for lvl in lvls:
         table.add_row(
-            l.id, l.label,
-            f"{l.score_min:.0f}–{l.score_max:.0f}",
-            l.human_equivalent,
+            lvl.id, lvl.label,
+            f"{lvl.score_min:.0f}–{lvl.score_max:.0f}",
+            lvl.human_equivalent,
         )
     console.print(table)
 
@@ -390,8 +390,7 @@ def score(data_path: str, system_id: str | None, as_json: bool, save: str | None
         else:
             avg_value = 0.0
 
-        # Pass rate contributes to confidence, average value IS the score
-        pass_rate = passed / total if total > 0 else 0.0
+        # Average value IS the score; confidence is set by sample size below.
         dimension_score = avg_value
 
         # Determine sub-level from graph

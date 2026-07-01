@@ -20,7 +20,6 @@ def load_data_files(data_dir: Path) -> list[dict[str, Any]]:
 
 def load_profiles(profile_dir: Path) -> list[dict[str, Any]]:
     """Load ACF profile JSON files from a directory."""
-    from acf.scoring.profile import ACFProfile
 
     profiles = []
     for f in sorted(profile_dir.glob("*.json")):
