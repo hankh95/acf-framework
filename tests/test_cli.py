@@ -44,13 +44,13 @@ class TestMeasuresCommand:
     def test_list_measures(self, runner):
         result = runner.invoke(main, ["measures"])
         assert result.exit_code == 0
-        assert "69 measures total" in result.output
+        assert "70 measures total" in result.output
 
     def test_measures_json(self, runner):
         result = runner.invoke(main, ["measures", "--json-output"])
         assert result.exit_code == 0
         data = json.loads(result.output)
-        assert len(data) == 69
+        assert len(data) == 70
 
 
 class TestLevelsCommand:
@@ -79,7 +79,7 @@ class TestInfoCommand:
         assert result.exit_code == 0
         data = json.loads(result.output)
         assert data["dimensions"] == 10
-        assert data["measures"] == 69
+        assert data["measures"] == 70
 
 
 class TestQueryCommand:
