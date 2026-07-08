@@ -37,13 +37,13 @@
 
 <#H122.4> a acf:Hypothesis ;
     acf:id "H122.4" ;
-    rdfs:label "Provenance Requirement" ;
-    acf:description "Requiring provenance (traceability) for claims improves accuracy without reducing coverage." ;
-    acf:target ">=95% accuracy with provenance vs <80% without; coverage >=90%" ;
-    acf:targetValue "0.95"^^xsd:decimal ;
-    acf:comparison "GE" ;
-    acf:metric "accuracy_with_provenance" ;
-    acf:dimension <#FactualGrounding>, <#KnowledgeTransparency> ;
+    rdfs:label "Epistemic Honesty (Never-Launder)" ;
+    acf:description "An intelligent system separates the ASSERTORIC register (claims-to-truth) from the GENERATIVE register (creation, fiction, hypothesis). In the assertoric register it emits only provenance-backed claims and abstains otherwise (structural zero false-proofs); generative acts are UNRESTRICTED in novelty but register-labeled and never presented as fact. Honesty is achieved by register-integrity, not by suppressing generation: hallucination is an INVOLUNTARY assertoric-register violation (the system believes it is asserting truth but is not), structurally prevented by the provable gate, while FULL GENERATIVE CAPABILITY IS RETAINED (an always-abstain system that never creates is not honest, it is useless). Supersedes the narrower v1.0 'Provenance Requirement', which survives as the corroborating accuracy-with-provenance sub-measure. Criteria: C1 assertoric gate (false_proofs=0, M-003), C2 register labeling (mislabel_rate=0, M-070), C3 correct abstention paired with coverage + C4 generative capability retained (M-064 GBA calibration penalizes both hallucination AND over-refusal)." ;
+    acf:target "assertoric false_proofs = 0 AND register mislabel_rate = 0 AND generative capability retained (no unhelpful over-refusal); corroborating: >=95% accuracy with provenance vs <80% without" ;
+    acf:targetValue "0"^^xsd:decimal ;
+    acf:comparison "EQ" ;
+    acf:metric "assertoric_false_proof_rate" ;
+    acf:dimension <#FactualGrounding>, <#KnowledgeTransparency>, <#GeneralizationBoundary> ;
     acf:category "architectural-design" .
 
 <#H122.5> a acf:Hypothesis ;

@@ -86,9 +86,9 @@ class TestDimensions:
 class TestMeasures:
     """Test measure loading and querying."""
 
-    def test_sixty_nine_measures(self, graph):
+    def test_seventy_measures(self, graph):
         ms = graph.measures()
-        assert len(ms) == 69
+        assert len(ms) == 70
 
     def test_measures_have_ids(self, graph):
         ms = graph.measures()
