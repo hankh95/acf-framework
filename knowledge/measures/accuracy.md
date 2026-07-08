@@ -36,6 +36,17 @@
     acf:collection "automated" ;
     acf:mapsTo <#FactualGrounding> .
 
+<#M-070> a acf:Measure ;
+    rdfs:label "Register Mislabel Rate" ;
+    acf:id "M-070" ;
+    acf:name "register_mislabel_rate" ;
+    acf:description "Percentage of outputs where GENERATIVE or hypothetical content (fiction, brainstorming, speculation, novel proposal) is presented in the ASSERTORIC register as established fact, OR unprovable content is asserted as proven. Zero is the honesty target: creation is free, but must be register-labeled and never laundered as fact. Distinct from Hallucination Rate (M-003) — M-003 counts ungrounded factual claims; M-070 counts REGISTER violations, the mislabeling that turns legitimate generation into a lie. Supports H122.4 criterion C2 (register labeling)." ;
+    acf:unit "percent" ;
+    acf:dataType "decimal" ;
+    acf:category "accuracy" ;
+    acf:collection "automated" ;
+    acf:mapsTo <#KnowledgeTransparency> .
+
 <#M-004> a acf:Measure ;
     rdfs:label "Evidence Coverage %" ;
     acf:id "M-004" ;
