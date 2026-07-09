@@ -115,7 +115,7 @@ acf query "<sparql>"                   # Run SPARQL over knowledge + data
 acf info                               # Show framework version and stats
 ```
 
-## 66 Measures
+## 70 Measures
 
 The framework includes 70 measures across 11 categories:
 
