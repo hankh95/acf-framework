@@ -14,7 +14,7 @@ pip install -e .
 
 # Explore the framework
 acf dimensions              # List all 10 ACF dimensions
-acf measures                # List all 66 measures
+acf measures                # List all 70 measures
 acf levels                  # Show certification levels (ACF-1 through ACF-6)
 
 # Evaluate your system
@@ -70,7 +70,7 @@ These four dimensions are jointly reported on the same task instances, which is 
 
 ACF uses [yurtle-rdflib](https://github.com/hankh95/yurtle-rdflib) to load all knowledge files into a live RDF graph at startup. This means:
 
-- **All 66 measures** have `acf:mapsTo` triples linking them to ACF dimensions
+- **All 70 measures** have `acf:mapsTo` triples linking them to ACF dimensions
 - **All 14 hypotheses** are queryable with their targets and validation methodology
 - **Collected data** (JSON files) is ingested as RDF triples for unified querying
 - **Ad-hoc analysis** via SPARQL — no custom code needed for common queries
@@ -117,7 +117,7 @@ acf info                               # Show framework version and stats
 
 ## 66 Measures
 
-The framework includes 66 measures across 11 categories:
+The framework includes 70 measures across 11 categories:
 
 - **Accuracy** (M-001–M-010): Routing, hallucination, provenance, calibration
 - **Latency** (M-011–M-018): Processing paths, queries, end-to-end response
