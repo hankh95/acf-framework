@@ -205,7 +205,7 @@ These hypotheses establish testable predictions about AGI measurement, dimension
 
 ### Architectural Design (H122.4)
 
-**H122.4 — Provenance Requirement**: Requiring source attribution for all claims should improve accuracy without sacrificing coverage — a key design principle for high-scoring ACF systems.
+**H122.4 — Epistemic Honesty (Never-Launder)**: An intelligent system separates the *assertoric* register (claims-to-truth — provenance-backed, structural zero false-proofs) from the *generative* register (creation, fiction, hypothesis — unrestricted in novelty but register-labeled and never presented as fact). Honesty is achieved by register-integrity, not by suppressing generation: hallucination is an involuntary assertoric-register violation, structurally prevented by the provable gate, while full generative capability is retained. Supersedes the narrower v1.0 "Provenance Requirement", which survives as the corroborating accuracy-with-provenance sub-measure.
 
 ### Paradigm Comparison (H122.5, H122.6, H122.7)
 
