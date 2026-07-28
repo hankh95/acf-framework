@@ -1,5 +1,9 @@
 # ACF Framework
 
+[![PyPI](https://img.shields.io/pypi/v/acf-framework)](https://pypi.org/project/acf-framework/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21651775.svg)](https://doi.org/10.5281/zenodo.21651775)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 A graph-based framework for measuring Artificial General Intelligence.
 
 The AGI Certification Framework (ACF) provides a rigorous, multi-dimensional scoring system for evaluating AI system capabilities against human professional standards. All knowledge — dimensions, measures, hypotheses, collected data — lives in an RDF graph, queryable via SPARQL.
@@ -7,10 +11,8 @@ The AGI Certification Framework (ACF) provides a rigorous, multi-dimensional sco
 ## Quick Start
 
 ```bash
-# Not yet on PyPI — install from source:
-git clone https://github.com/hankh95/acf-framework.git
-cd acf-framework
-pip install -e .
+# Install from PyPI:
+pip install acf-framework
 
 # Explore the framework
 acf dimensions              # List all 10 ACF dimensions
@@ -152,6 +154,12 @@ The framework includes 14 testable hypotheses about AGI measurement:
 
 ## Installation
 
+### From PyPI
+
+```bash
+pip install acf-framework
+```
+
 ### From source (development)
 
 ```bash
@@ -198,7 +206,8 @@ If you use the ACF framework in your research, please cite:
   title = {ACF Framework: A Graph-Based Framework for Measuring AGI},
   author = {Head, Hank and {Congruent Systems LLC}},
   year = {2026},
-  url = {https://github.com/hankh95/acf-framework},
+  doi = {10.5281/zenodo.21651775},
+  url = {https://doi.org/10.5281/zenodo.21651775},
   license = {MIT}
 }
 ```
