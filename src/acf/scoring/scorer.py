@@ -1,5 +1,5 @@
 """
-ACF Scorer: Score AI systems across the 10 ACF v1.1 dimensions.
+ACF Scorer: Score AI systems across the 12 ACF v1.2 dimensions.
 
 Each dimension has a scoring function that takes raw metrics and returns
 an ACFDimensionScore. The ACFScorer aggregates dimension scores into

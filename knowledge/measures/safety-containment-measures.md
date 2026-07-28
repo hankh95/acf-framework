@@ -24,3 +24,13 @@
     acf:category "safety" ;
     acf:collection "automated" ;
     acf:mapsTo <#SafetyContainment> .
+---
+
+# Safety / Containment Measures
+
+These measures quantify the **Safety / Containment** dimension — whether a loaded capability module can access capabilities beyond its signed manifest grants (see `knowledge/dimensions/safety-containment.md`).
+
+- **M-071 — Containment Violation Rate** (`containment_violation_rate`): the primary metric. The rate at which adversarial grant-escalation attempts succeed (across native and WASM boundaries, including delegation/composition); target `0`.
+- **M-072 — Manifest-Grant Enforcement Rate** (`grant_enforcement_rate`): the positive complement. The rate at which capability requests absent from a module's manifest are correctly refused (fail-closed default-deny).
+
+Together they express H122.15 (Capability Containment): a loaded module never exceeds its declared grants, enforced by construction.
