@@ -170,7 +170,6 @@ pip install -e ".[dev]"
 
 - **Core**: `yurtle-rdflib`, `click`, `rich`
 - **Development**: `pytest`, `ruff`, `mypy`
-- **Optional** `[search]`: `nusy-nano` (semantic search via txtai)
 
 ## Honest Limitations
 
