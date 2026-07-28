@@ -4,93 +4,107 @@
 @prefix acf: <https://acf-framework.dev/ns/> .
 
 <#DefaultWeights> a acf:WeightConfiguration ;
-    acf:label "ACF v1.1 Default Weights" ;
-    acf:description "Non-equal weighting across all 10 ACF dimensions per ACF Specification v1.1 Section 3.2." .
+    acf:label "ACF v1.2 Default Weights" ;
+    acf:description "Non-equal weighting across all 12 ACF dimensions per ACF Specification v1.2 Section 3.2. v1.2 adds the modular-capability dimensions Safety/Containment and Knowledge Transfer and re-normalizes the prior ten so the weights sum to 1.0." .
 
 <#Weight-Depth> a acf:DimensionWeight ;
     acf:dimension acf:Depth ;
-    acf:weight 0.15 ;
+    acf:weight 0.13 ;
     acf:configuration <#DefaultWeights> .
 
 <#Weight-FactualGrounding> a acf:DimensionWeight ;
     acf:dimension acf:FactualGrounding ;
-    acf:weight 0.15 ;
+    acf:weight 0.13 ;
+    acf:configuration <#DefaultWeights> .
+
+<#Weight-SafetyContainment> a acf:DimensionWeight ;
+    acf:dimension acf:SafetyContainment ;
+    acf:weight 0.10 ;
     acf:configuration <#DefaultWeights> .
 
 <#Weight-Breadth> a acf:DimensionWeight ;
     acf:dimension acf:Breadth ;
-    acf:weight 0.10 ;
+    acf:weight 0.09 ;
     acf:configuration <#DefaultWeights> .
 
 <#Weight-FormalReasoning> a acf:DimensionWeight ;
     acf:dimension acf:FormalReasoning ;
-    acf:weight 0.10 ;
+    acf:weight 0.09 ;
     acf:configuration <#DefaultWeights> .
 
 <#Weight-CompositionalGeneralization> a acf:DimensionWeight ;
     acf:dimension acf:CompositionalGeneralization ;
-    acf:weight 0.10 ;
+    acf:weight 0.08 ;
     acf:configuration <#DefaultWeights> .
 
 <#Weight-KnowledgeTransparency> a acf:DimensionWeight ;
     acf:dimension acf:KnowledgeTransparency ;
-    acf:weight 0.10 ;
+    acf:weight 0.08 ;
     acf:configuration <#DefaultWeights> .
 
 <#Weight-GeneralizationBoundaryAwareness> a acf:DimensionWeight ;
     acf:dimension acf:GeneralizationBoundaryAwareness ;
-    acf:weight 0.10 ;
+    acf:weight 0.08 ;
     acf:configuration <#DefaultWeights> .
 
 <#Weight-ActionCapability> a acf:DimensionWeight ;
     acf:dimension acf:ActionCapability ;
-    acf:weight 0.10 ;
+    acf:weight 0.08 ;
+    acf:configuration <#DefaultWeights> .
+
+<#Weight-KnowledgeTransfer> a acf:DimensionWeight ;
+    acf:dimension acf:KnowledgeTransfer ;
+    acf:weight 0.06 ;
     acf:configuration <#DefaultWeights> .
 
 <#Weight-Autonomy> a acf:DimensionWeight ;
     acf:dimension acf:Autonomy ;
-    acf:weight 0.05 ;
+    acf:weight 0.04 ;
     acf:configuration <#DefaultWeights> .
 
 <#Weight-ServiceOrientation> a acf:DimensionWeight ;
     acf:dimension acf:ServiceOrientation ;
-    acf:weight 0.05 ;
+    acf:weight 0.04 ;
     acf:configuration <#DefaultWeights> .
 ---
 
-# Default Dimension Weights (v1.1)
+# Default Dimension Weights (v1.2)
 
-**Configuration:** Non-equal weights per ACF Specification v1.1 Section 3.2
+**Configuration:** Non-equal weights per ACF Specification v1.2 Section 3.2
 
 ## Overview
 
-The ACF v1.1 aggregate score is computed as the **weighted sum** of all 10 dimension scores. Weights reflect the relative importance of each dimension to overall understanding:
+The ACF v1.2 aggregate score is computed as the **weighted sum** of all 12 dimension scores. Weights reflect the relative importance of each dimension to overall understanding:
 
 | Dimension | Abbrev | Weight | Rationale |
 |-----------|--------|--------|-----------|
-| Depth | DP | **0.15** | Core understanding measure |
-| Factual Grounding | FG | **0.15** | Prevents hallucination |
-| Breadth | BR | 0.10 | Foundation for generalization |
-| Formal Reasoning | FR | 0.10 | Critical for professional domains |
-| Compositional Generalization | CG | 0.10 | Tests genuine understanding |
-| Knowledge Transparency | KT | 0.10 | Enables verification |
-| Generalization Boundary Awareness | GBA | 0.10 | Distinguishes narrow vs general AI |
-| Action Capability | AC | **0.10** | Bridges knowledge and competence |
-| Autonomy | AU | 0.05 | Self-directed learning |
-| Service Orientation | SO | 0.05 | Real-world utility |
+| Depth | DP | **0.13** | Core understanding measure |
+| Factual Grounding | FG | **0.13** | Prevents hallucination |
+| Safety / Containment | SC | **0.10** | A loaded module cannot exceed its manifest grants (safety property) |
+| Breadth | BR | 0.09 | Foundation for generalization |
+| Formal Reasoning | FR | 0.09 | Critical for professional domains |
+| Compositional Generalization | CG | 0.08 | Tests genuine understanding |
+| Knowledge Transparency | KT | 0.08 | Enables verification |
+| Generalization Boundary Awareness | GBA | 0.08 | Distinguishes narrow vs general AI |
+| Action Capability | AC | 0.08 | Bridges knowledge and competence |
+| Knowledge Transfer | KTR | 0.06 | Capability is a loadable/unloadable modular unit |
+| Autonomy | AU | 0.04 | Self-directed learning |
+| Service Orientation | SO | 0.04 | Real-world utility |
 
 **Total:** 1.00
 
-## v1.0 to v1.1 Changes
+## v1.1 to v1.2 Changes
 
 | Change | Detail |
 |--------|--------|
-| Added Action Capability (AC) | 10th dimension at 10% weight |
-| Autonomy reduced | 10% -> 5% |
-| Service Orientation reduced | 10% -> 5% |
-| Depth increased | 11.1% -> 15% |
-| Factual Grounding increased | 11.1% -> 15% |
-| All other dimensions adjusted | 11.1% -> 10% |
+| Added Safety / Containment (SC) | 11th dimension at 10% weight — the modular-capability *safety* axis (H122.15) |
+| Added Knowledge Transfer (KTR) | 12th dimension at 6% weight — the modular-capability *transfer* axis (H122.16) |
+| Depth / Factual Grounding | 15% -> 13% each (re-normalized to make room) |
+| Breadth / Formal Reasoning | 10% -> 9% each |
+| Compositional Generalization / Knowledge Transparency / GBA / Action Capability | 10% -> 8% each |
+| Autonomy / Service Orientation | 5% -> 4% each |
+
+The two new dimensions arise from the **modular-capability paradigm** (systems that acquire competence by loading executable modules). They are orthogonal axes — one a *safety* property (containment), one a *capability* property (transfer) — and are weighted per their load-bearing role: Safety/Containment at 0.10 (a containment failure is a safety failure), Knowledge Transfer at 0.06.
 
 ## When to Customize Weights
 
@@ -98,20 +112,22 @@ The default weights are designed for general-purpose AI evaluation. Domain-speci
 
 ### Medical Domain
 
-A medical AI system might weight Factual Grounding and Action Capability higher because incorrect facts or failed procedures can cause direct patient harm:
+A medical AI system might weight Factual Grounding, Safety/Containment, and Action Capability higher because incorrect facts, uncontained tool use, or failed procedures can cause direct patient harm:
 
 | Dimension | Custom Weight |
 |-----------|---------------|
-| Factual Grounding | 0.20 |
-| Action Capability | 0.15 |
-| Depth | 0.12 |
-| Generalization Boundary Awareness | 0.10 |
-| Knowledge Transparency | 0.10 |
-| Formal Reasoning | 0.08 |
-| Compositional Generalization | 0.08 |
-| Service Orientation | 0.07 |
+| Factual Grounding | 0.18 |
+| Safety / Containment | 0.12 |
+| Action Capability | 0.12 |
+| Depth | 0.10 |
+| Generalization Boundary Awareness | 0.09 |
+| Knowledge Transparency | 0.08 |
+| Formal Reasoning | 0.06 |
+| Compositional Generalization | 0.06 |
+| Knowledge Transfer | 0.05 |
+| Service Orientation | 0.05 |
 | Breadth | 0.05 |
-| Autonomy | 0.05 |
+| Autonomy | 0.04 |
 
 ### Legal Domain
 
@@ -119,16 +135,18 @@ A legal AI system might weight Formal Reasoning and Depth higher because legal r
 
 | Dimension | Custom Weight |
 |-----------|---------------|
-| Formal Reasoning | 0.18 |
-| Depth | 0.15 |
-| Factual Grounding | 0.12 |
-| Compositional Generalization | 0.10 |
-| Knowledge Transparency | 0.10 |
-| Breadth | 0.10 |
-| Service Orientation | 0.08 |
-| Generalization Boundary Awareness | 0.07 |
-| Action Capability | 0.05 |
-| Autonomy | 0.05 |
+| Formal Reasoning | 0.16 |
+| Depth | 0.14 |
+| Factual Grounding | 0.11 |
+| Compositional Generalization | 0.09 |
+| Knowledge Transparency | 0.09 |
+| Breadth | 0.09 |
+| Safety / Containment | 0.08 |
+| Service Orientation | 0.07 |
+| Generalization Boundary Awareness | 0.06 |
+| Knowledge Transfer | 0.05 |
+| Action Capability | 0.03 |
+| Autonomy | 0.03 |
 
 ## Rules for Custom Weights
 

@@ -1,4 +1,4 @@
-"""Tests for ACF scoring engine (v1.1 — 10 dimensions, per-dimension gating)."""
+"""Tests for ACF scoring engine (v1.2 — 12 dimensions, per-dimension gating)."""
 
 import pytest
 
@@ -8,6 +8,7 @@ from acf.scoring.profile import (
     V11_WEIGHTS,
     CERTIFICATION_THRESHOLDS,
     CERTIFICATION_LABELS,
+    MODULAR_CAPABILITY_DIMS,
 )
 from acf.scoring.scorer import (
     score_action_capability,
@@ -50,18 +51,25 @@ class TestV11Weights:
         assert abs(total - 1.0) < 0.001, f"Weights sum to {total}, expected 1.0"
 
     def test_ten_dimensions(self):
-        assert len(V11_WEIGHTS) == 10
+        assert len(V11_WEIGHTS) == 12
 
     def test_no_zero_weights(self):
         for name, w in V11_WEIGHTS.items():
             assert w > 0, f"Dimension {name} has zero weight"
 
     def test_depth_and_fg_highest(self):
-        assert V11_WEIGHTS["depth"] == 0.15
-        assert V11_WEIGHTS["factual_grounding"] == 0.15
+        assert V11_WEIGHTS["depth"] == 0.13
+        assert V11_WEIGHTS["factual_grounding"] == 0.13
+        # Depth and FG remain the joint-highest weights in v1.2.
+        assert V11_WEIGHTS["depth"] == max(V11_WEIGHTS.values())
 
     def test_action_capability_weight(self):
-        assert V11_WEIGHTS["action_capability"] == 0.10
+        assert V11_WEIGHTS["action_capability"] == 0.08
+
+    def test_modular_capability_weights(self):
+        # v1.2 modular-capability dimensions
+        assert V11_WEIGHTS["safety_containment"] == 0.10
+        assert V11_WEIGHTS["knowledge_transfer"] == 0.06
 
 
 class TestACFProfileAggregate:
@@ -80,7 +88,7 @@ class TestACFProfileAggregate:
         profile = ACFProfile(
             system_id="test", system_type="llm", version="1.0",
         )
-        # Only depth (15%) at 100, rest at 0 -> aggregate = 15
+        # Only depth (13% in v1.2) at 100, rest at 0 -> aggregate = 13
         profile.dimensions["depth"] = ACFDimensionScore(
             dimension="depth", score=100.0, sub_level="L6",
         )
@@ -89,7 +97,7 @@ class TestACFProfileAggregate:
                 profile.dimensions[dim] = ACFDimensionScore(
                     dimension=dim, score=0.0, sub_level="X0",
                 )
-        assert abs(profile.aggregate_score - 15.0) < 0.01
+        assert abs(profile.aggregate_score - 13.0) < 0.01
 
     def test_empty_profile(self):
         profile = ACFProfile(
@@ -108,9 +116,9 @@ class TestACFProfileAggregate:
         profile.dimensions["breadth"] = ACFDimensionScore(
             dimension="breadth", score=100.0, sub_level="B4",
         )
-        # depth=100*0.15 + breadth=100*0.10 = 25, total_weight=0.25
-        # aggregate = 25.0
-        assert abs(profile.aggregate_score - 25.0) < 0.01
+        # v1.2: depth=100*0.13 + breadth=100*0.09 = 22, total_weight=0.22
+        # aggregate = 22.0
+        assert abs(profile.aggregate_score - 22.0) < 0.01
 
 
 class TestACFCertificationGating:
@@ -123,6 +131,39 @@ class TestACFCertificationGating:
                 dimension=dim, score=95.0, sub_level="X",
             )
         assert profile.certification_level == "ACF-6"
+
+    def test_non_modular_system_not_gated_by_modular_dims(self):
+        # v1.2 conditional applicability: a system that loads no capability
+        # modules provides no safety_containment / knowledge_transfer scores.
+        # Those dims are N/A and must NOT block certification — otherwise every
+        # monolithic (non-module-loading) system would be capped at ACF-2.
+        profile = ACFProfile(
+            system_id="monolith", system_type="llm", version="1.0",
+        )
+        for dim in V11_WEIGHTS:
+            if dim not in MODULAR_CAPABILITY_DIMS:
+                profile.dimensions[dim] = ACFDimensionScore(
+                    dimension=dim, score=95.0, sub_level="X",
+                )
+        assert "safety_containment" not in profile.dimensions
+        assert "knowledge_transfer" not in profile.dimensions
+        # Reaches ACF-6 on the core dims alone; the two modular dims are N/A.
+        assert profile.certification_level == "ACF-6"
+
+    def test_module_loading_system_gated_by_containment(self):
+        # A system that DOES provide modular scores IS gated by them: a strong
+        # core but a failing containment score must not reach ACF-6.
+        profile = ACFProfile(
+            system_id="uncontained", system_type="neurosymbolic", version="1.0",
+        )
+        for dim in V11_WEIGHTS:
+            profile.dimensions[dim] = ACFDimensionScore(
+                dimension=dim, score=95.0, sub_level="X",
+            )
+        profile.dimensions["safety_containment"] = ACFDimensionScore(
+            dimension="safety_containment", score=40.0, sub_level="SC1",
+        )
+        assert profile.certification_level != "ACF-6"
 
     def test_acf3_all_70(self):
         profile = ACFProfile(
@@ -282,7 +323,7 @@ class TestRoundtripSerialization:
         restored = ACFProfile.from_dict(d)
 
         assert restored.system_id == "my-system"
-        assert len(restored.dimensions) == 10
+        assert len(restored.dimensions) == 12
         assert abs(restored.aggregate_score - profile.aggregate_score) < 0.1
         assert restored.certification_level == profile.certification_level
 

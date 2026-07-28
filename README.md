@@ -13,8 +13,8 @@ cd acf-framework
 pip install -e .
 
 # Explore the framework
-acf dimensions              # List all 10 ACF dimensions
-acf measures                # List all 70 measures
+acf dimensions              # List all 12 ACF dimensions
+acf measures                # List all 74 measures
 acf levels                  # Show certification levels (ACF-1 through ACF-6)
 
 # Evaluate your system
@@ -25,9 +25,9 @@ acf score path/to/data/     # Generate ACF profile with certification level
 acf query "SELECT ?id ?name WHERE { ?m acf:mapsTo <#Depth> ; acf:id ?id ; rdfs:label ?name . }"
 ```
 
-## The Ten Dimensions
+## The Twelve Dimensions
 
-The ACF evaluates AI systems across 10 dimensions (independently measurable; see the limitations section for the H122.1 finding on cross-dimensional correlation):
+The ACF evaluates AI systems across 12 dimensions (independently measurable; see the limitations section for the H122.1 finding on cross-dimensional correlation):
 
 | Dimension | What it measures | Sub-levels |
 |-----------|-----------------|------------|
@@ -41,6 +41,8 @@ The ACF evaluates AI systems across 10 dimensions (independently measurable; see
 | **Generalization Boundary Awareness** (GBA1-GBA4) | Knowing what you don't know | 4 |
 | **Autonomy** (AU1-AU4) | Self-directed learning and operation | 4 |
 | **Action Capability** (AC1-AC4) | Knowledge-to-action: tool use, latency awareness, safety boundaries, chaining (added v1.1) | 4 |
+| **Safety / Containment** (SC1-SC4) | A loaded module cannot access capabilities beyond its signed manifest grants — the modular-capability *safety* axis (added v1.2) | 4 |
+| **Knowledge Transfer** (KTR1-KTR4) | Domain competence is a loadable/unloadable modular unit attributable to the module — the modular-capability *transfer* axis (added v1.2) | 4 |
 
 ## Why Neurosymbolic? Relevance to NeSy Evaluation
 
@@ -70,8 +72,8 @@ These four dimensions are jointly reported on the same task instances, which is 
 
 ACF uses [yurtle-rdflib](https://github.com/hankh95/yurtle-rdflib) to load all knowledge files into a live RDF graph at startup. This means:
 
-- **All 70 measures** have `acf:mapsTo` triples linking them to ACF dimensions
-- **All 14 hypotheses** are queryable with their targets and validation methodology
+- **All 74 measures** have `acf:mapsTo` triples linking them to ACF dimensions
+- **All 16 hypotheses** are queryable with their targets and validation methodology
 - **Collected data** (JSON files) is ingested as RDF triples for unified querying
 - **Ad-hoc analysis** via SPARQL — no custom code needed for common queries
 
@@ -115,9 +117,9 @@ acf query "<sparql>"                   # Run SPARQL over knowledge + data
 acf info                               # Show framework version and stats
 ```
 
-## 70 Measures
+## 74 Measures
 
-The framework includes 70 measures across 11 categories:
+The framework includes 74 measures across 13 categories:
 
 - **Accuracy** (M-001–M-010): Routing, hallucination, provenance, calibration
 - **Latency** (M-011–M-018): Processing paths, queries, end-to-end response
@@ -130,10 +132,12 @@ The framework includes 70 measures across 11 categories:
 - **Y-Layer Quality** (M-047–M-052): Fact correctness, inference coherence
 - **Y-Layer Structural** (M-053–M-055): Provenance, connectivity
 - **Proposed** (M-056–M-066): Domain count, Bloom profile, task completion
+- **Safety / Containment** (M-071–M-072): Containment violation rate, manifest-grant enforcement (v1.2)
+- **Knowledge Transfer** (M-073–M-074): Load/unload differential, unloaded hallucination rate (v1.2)
 
-## 14 Hypotheses
+## 16 Hypotheses
 
-The framework includes 14 testable hypotheses about AGI measurement:
+The framework includes 16 testable hypotheses about AGI measurement:
 
 - **H122.1**: Breadth-Depth Independence (r < 0.3)
 - **H122.2**: Human Certification Equivalence (ACF-3+)
@@ -149,6 +153,8 @@ The framework includes 14 testable hypotheses about AGI measurement:
 - **H122.12**: Autonomous Gap Detection (70%+)
 - **H122.13**: Crystallization Efficiency (99%+)
 - **H122.14**: Self-Directed Learning
+- **H122.15**: Capability Containment — a loaded module cannot exceed its signed manifest grants (Safety/Containment SC4; v1.2)
+- **H122.16**: Capability Transfer — module-attributable load/unload differential; unloaded hallucinated-domain-answer rate = 0 (Knowledge Transfer KTR4; v1.2)
 
 ## Installation
 

@@ -42,7 +42,7 @@ class TestGraphLoading:
         assert graph.triple_count() > 0
 
     def test_graph_has_significant_triples(self, graph):
-        # 9 dimensions + 6 levels + 66 measures + 14 hypotheses + sub-levels
+        # 12 dimensions + 6 levels + 74 measures + 16 hypotheses + sub-levels
         assert graph.triple_count() > 500
 
 
@@ -51,7 +51,7 @@ class TestDimensions:
 
     def test_ten_dimensions(self, graph):
         dims = graph.dimensions()
-        assert len(dims) == 10
+        assert len(dims) == 12
 
     def test_dimension_ids(self, graph):
         dims = graph.dimensions()
@@ -61,6 +61,7 @@ class TestDimensions:
             "compositional-generalization", "knowledge-transparency",
             "service-orientation", "generalization-boundary", "autonomy",
             "action_capability",
+            "safety-containment", "knowledge-transfer",
         }
         assert ids == expected
 
@@ -88,7 +89,7 @@ class TestMeasures:
 
     def test_seventy_measures(self, graph):
         ms = graph.measures()
-        assert len(ms) == 70
+        assert len(ms) == 74
 
     def test_measures_have_ids(self, graph):
         ms = graph.measures()
@@ -145,13 +146,15 @@ class TestHypotheses:
 
     def test_fourteen_hypotheses(self, graph):
         hyps = graph.hypotheses()
-        assert len(hyps) == 14
+        assert len(hyps) == 16
 
     def test_hypothesis_ids(self, graph):
         hyps = graph.hypotheses()
         ids = {h.id for h in hyps}
         assert "H122.1" in ids
         assert "H122.14" in ids
+        assert "H122.15" in ids
+        assert "H122.16" in ids
 
     def test_hypothesis_has_description(self, graph):
         hyps = graph.hypotheses()
@@ -168,7 +171,7 @@ class TestSPARQL:
                 ?s a acf:Dimension ; acf:id ?id .
             }
         """)
-        assert len(results) == 10
+        assert len(results) == 12
 
     def test_query_with_filter(self, graph):
         results = graph.query("""
