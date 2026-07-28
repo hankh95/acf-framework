@@ -9,6 +9,7 @@ authors:
     affiliation: "Congruent Systems LLC"
 url: "https://github.com/hankh95/acf-framework"
 repository-code: "https://github.com/hankh95/acf-framework"
+doi: "10.5281/zenodo.21651775"
 license: MIT
 version: "1.1.0"
 date-released: "2026-05-04"
@@ -37,5 +38,6 @@ preferred-citation:
       affiliation: "Congruent Systems LLC"
   year: 2026
   version: "1.1.0"
-  url: "https://github.com/hankh95/acf-framework"
+  doi: "10.5281/zenodo.21651775"
+  url: "https://doi.org/10.5281/zenodo.21651775"
   license: MIT
