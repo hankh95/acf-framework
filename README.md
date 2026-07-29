@@ -144,7 +144,7 @@ The framework includes 16 testable hypotheses about AGI measurement:
 - **H122.1**: Breadth-Depth Independence (r < 0.3)
 - **H122.2**: Human Certification Equivalence (ACF-3+)
 - **H122.3**: Service Orientation Correlation (r > 0.7)
-- **H122.4**: Provenance Requirement (>=95% accuracy)
+- **H122.4**: Epistemic Honesty / Never-Launder — assertoric false_proofs=0 AND register mislabel_rate=0, full generative capability retained (supersedes the v1.0 Provenance Requirement, which survives as the corroborating accuracy-with-provenance sub-measure)
 - **H122.5**: LLM Depth Ceiling (<60% on L5-L6)
 - **H122.6**: Understanding Efficiency (UER >=10x)
 - **H122.7**: Compositional Generalization Gap
