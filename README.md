@@ -123,7 +123,7 @@ acf info                               # Show framework version and stats
 
 The framework includes 74 measures across 13 categories:
 
-- **Accuracy** (M-001–M-010): Routing, hallucination, provenance, calibration
+- **Accuracy** (M-001–M-010, M-070): Routing, hallucination, provenance, calibration, register mislabel
 - **Latency** (M-011–M-018): Processing paths, queries, end-to-end response
 - **Efficiency** (M-019–M-021): Compute acceleration, call reduction
 - **Quantity** (M-022–M-025): Knowledge graph growth, topic coverage
@@ -133,7 +133,7 @@ The framework includes 74 measures across 13 categories:
 - **Y-Layer Growth** (M-044–M-046): Enrichment rate, confidence, diversity
 - **Y-Layer Quality** (M-047–M-052): Fact correctness, inference coherence
 - **Y-Layer Structural** (M-053–M-055): Provenance, connectivity
-- **Proposed** (M-056–M-066): Domain count, Bloom profile, task completion
+- **Proposed / Action Capability** (M-056–M-069): Domain count, Bloom profile, task completion, action capability (M-067–M-069, v1.1)
 - **Safety / Containment** (M-071–M-072): Containment violation rate, manifest-grant enforcement (v1.2)
 - **Knowledge Transfer** (M-073–M-074): Load/unload differential, unloaded hallucination rate (v1.2)
 
