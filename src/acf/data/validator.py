@@ -5,7 +5,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-
 REQUIRED_ENVELOPE_FIELDS = ["record_type", "measure_id"]
 
 VALID_RECORD_TYPES = {"experiment-run", "longitudinal-series", "per-query-record"}

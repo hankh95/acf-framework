@@ -5,7 +5,6 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-
 # ACF v1.2 dimension weights (must sum to 1.0).
 # Per ACF Specification v1.2 Section 3.2. v1.2 adds the modular-capability
 # dimensions Safety/Containment (0.10) and Knowledge Transfer (0.06) and

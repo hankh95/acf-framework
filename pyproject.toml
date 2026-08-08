@@ -37,7 +37,7 @@ dependencies = [
 dev = [
     "pytest>=7.0.0",
     "pytest-cov>=4.0.0",
-    "ruff>=0.1.0",
+    "ruff>=0.16,<0.17",  # pinned range: an unpinned ruff floated the CI gate red (issue #32)
     "mypy>=1.0.0",
 ]
 docs = [

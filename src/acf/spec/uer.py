@@ -16,7 +16,6 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-
 # Bloom level weights — higher levels contribute more to depth score
 BLOOM_WEIGHTS: dict[str, float] = {
     "L1": 1.0,   # Remember
@@ -145,8 +144,7 @@ def calculate_uer(snapshot: TrainingSnapshot) -> UERResult:
     understanding = calculate_understanding(snapshot)
 
     total_compute = snapshot.gpu_hours + snapshot.wall_clock_hours
-    if total_compute < MIN_COMPUTE:
-        total_compute = MIN_COMPUTE
+    total_compute = max(total_compute, MIN_COMPUTE)
 
     uer = min(understanding.composite / total_compute, MAX_UER)
 

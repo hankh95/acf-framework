@@ -52,8 +52,10 @@ def to_latex(profile: ACFProfile) -> str:
     lines = [
         r"\begin{table}[h]",
         r"\centering",
-        f"\\caption{{ACF Profile: {profile.system_id} "
-        f"({profile.certification_level})}}",
+        (
+            f"\\caption{{ACF Profile: {profile.system_id} "
+            f"({profile.certification_level})}}"
+        ),
         r"\begin{tabular}{lrll}",
         r"\toprule",
         r"Dimension & Score & Level & Confidence \\",
@@ -69,8 +71,10 @@ def to_latex(profile: ACFProfile) -> str:
 
     lines.extend([
         r"\midrule",
-        f"  \\textbf{{Aggregate}} & \\textbf{{{profile.aggregate_score:.1f}}} "
-        f"& \\textbf{{{profile.certification_level}}} & \\\\",
+        (
+            f"  \\textbf{{Aggregate}} & \\textbf{{{profile.aggregate_score:.1f}}} "
+            f"& \\textbf{{{profile.certification_level}}} & \\\\"
+        ),
         r"\bottomrule",
         r"\end{tabular}",
         r"\end{table}",

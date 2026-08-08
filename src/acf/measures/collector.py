@@ -42,7 +42,7 @@ def record_experiment_run(
 
     if data_dir:
         data_dir.mkdir(parents=True, exist_ok=True)
-        date_str = datetime.now().strftime("%Y-%m-%d")
+        date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
         filename = f"{experiment_id}_{measure_id}_{system_id}_{date_str}.json"
         (data_dir / filename).write_text(json.dumps(record, indent=2))
 
