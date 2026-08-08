@@ -21,11 +21,11 @@ from pathlib import Path
 import datasets
 
 _CITATION = """
-@software{acf-framework-v1.1.0,
-  title = {ACF Framework v1.1.0: A Neurosymbolic Capability Benchmark},
+@software{acf-framework-v1.1.1,
+  title = {ACF Framework v1.1.1: A Neurosymbolic Capability Benchmark},
   author = {Head, Hank and {Congruent Systems LLC}},
   year = {2026},
-  version = {1.1.0},
+  version = {1.1.1},
   url = {https://github.com/hankh95/acf-framework},
   license = {MIT}
 }

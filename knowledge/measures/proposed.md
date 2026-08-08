@@ -15,7 +15,7 @@
     acf:collection "automated" ;
     acf:priority "high" ;
     acf:targetVersion "v1" ;
-    acf:mapsToDimension <#Breadth> .
+    acf:mapsTo <#Breadth> .
 
 <#M-057> a acf:Measure ;
     acf:id "M-057" ;
@@ -27,7 +27,7 @@
     acf:collection "automated" ;
     acf:priority "high" ;
     acf:targetVersion "v1" ;
-    acf:mapsToDimension <#Breadth>, <#CompositionalGeneralization> .
+    acf:mapsTo <#Breadth>, <#CompositionalGeneralization> .
 
 <#M-058> a acf:Measure ;
     acf:id "M-058" ;
@@ -39,7 +39,7 @@
     acf:collection "automated" ;
     acf:priority "critical" ;
     acf:targetVersion "v1" ;
-    acf:mapsToDimension <#Depth> .
+    acf:mapsTo <#Depth> .
 
 <#M-059> a acf:Measure ;
     acf:id "M-059" ;
@@ -51,7 +51,7 @@
     acf:collection "llm-graded" ;
     acf:priority "high" ;
     acf:targetVersion "v1" ;
-    acf:mapsToDimension <#FormalReasoning> .
+    acf:mapsTo <#FormalReasoning> .
 
 <#M-060> a acf:Measure ;
     acf:id "M-060" ;
@@ -63,7 +63,7 @@
     acf:collection "automated" ;
     acf:priority "high" ;
     acf:targetVersion "v1" ;
-    acf:mapsToDimension <#CompositionalGeneralization> .
+    acf:mapsTo <#CompositionalGeneralization> .
 
 <#M-061> a acf:Measure ;
     acf:id "M-061" ;
@@ -75,7 +75,7 @@
     acf:collection "automated" ;
     acf:priority "high" ;
     acf:targetVersion "v1" ;
-    acf:mapsToDimension <#ServiceOrientation> .
+    acf:mapsTo <#ServiceOrientation> .
 
 # --- ACTION CAPABILITY (ACF v1.1) ---
 
@@ -89,7 +89,7 @@
     acf:collection "automated" ;
     acf:priority "high" ;
     acf:targetVersion "v1.1" ;
-    acf:mapsToDimension <#ActionCapability> .
+    acf:mapsTo <#ActionCapability> .
 
 <#M-068> a acf:Measure ;
     acf:id "M-068" ;
@@ -101,7 +101,7 @@
     acf:collection "automated" ;
     acf:priority "high" ;
     acf:targetVersion "v1.1" ;
-    acf:mapsToDimension <#ActionCapability> .
+    acf:mapsTo <#ActionCapability> .
 
 <#M-069> a acf:Measure ;
     acf:id "M-069" ;
@@ -113,7 +113,7 @@
     acf:collection "automated" ;
     acf:priority "high" ;
     acf:targetVersion "v1.1" ;
-    acf:mapsToDimension <#ActionCapability> .
+    acf:mapsTo <#ActionCapability> .
 
 # --- MEDIUM PRIORITY (ACF v2) ---
 
@@ -127,7 +127,7 @@
     acf:collection "llm-graded" ;
     acf:priority "medium" ;
     acf:targetVersion "v2" ;
-    acf:mapsToDimension <#ServiceOrientation> .
+    acf:mapsTo <#ServiceOrientation> .
 
 <#M-063> a acf:Measure ;
     acf:id "M-063" ;
@@ -139,7 +139,7 @@
     acf:collection "automated" ;
     acf:priority "medium" ;
     acf:targetVersion "v2" ;
-    acf:mapsToDimension <#GeneralizationBoundaryAwareness> .
+    acf:mapsTo <#GeneralizationBoundary> .
 
 <#M-064> a acf:Measure ;
     acf:id "M-064" ;
@@ -151,7 +151,7 @@
     acf:collection "llm-graded" ;
     acf:priority "medium" ;
     acf:targetVersion "v2" ;
-    acf:mapsToDimension <#GeneralizationBoundaryAwareness> .
+    acf:mapsTo <#GeneralizationBoundary> .
 
 <#M-065> a acf:Measure ;
     acf:id "M-065" ;
@@ -163,7 +163,7 @@
     acf:collection "automated" ;
     acf:priority "medium" ;
     acf:targetVersion "v2" ;
-    acf:mapsToDimension <#Autonomy> .
+    acf:mapsTo <#Autonomy> .
 
 <#M-066> a acf:Measure ;
     acf:id "M-066" ;
@@ -175,7 +175,7 @@
     acf:collection "automated" ;
     acf:priority "medium" ;
     acf:targetVersion "v2" ;
-    acf:mapsToDimension <#Autonomy> .
+    acf:mapsTo <#Autonomy> .
 ---
 
 # Proposed Measures: M-056 through M-066
