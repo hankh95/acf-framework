@@ -21,7 +21,7 @@ import click
 from rich.console import Console
 from rich.table import Table
 
-from acf.graph import ACFGraph, KNOWLEDGE_DIR
+from acf.graph import KNOWLEDGE_DIR, ACFGraph
 
 console = Console()
 
@@ -36,7 +36,6 @@ def _get_graph(data_dir: str | None = None) -> ACFGraph:
 @click.version_option(package_name="acf-framework")
 def main():
     """ACF: Graph-based AGI Certification Framework."""
-    pass
 
 
 @main.command()
@@ -172,7 +171,7 @@ def run_query(sparql: str, data_dir: str | None, as_json: bool):
 
     try:
         results = graph.query(sparql)
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001 — CLI boundary: any query failure prints and exits
         console.print(f"[red]SPARQL error: {e}[/red]")
         sys.exit(1)
 
@@ -562,7 +561,6 @@ def batteries():
     `acf.batteries.load_battery(name)` returns the items as dicts; implement
     the `acf.batteries.BatteryRunner` Protocol for your own system to evaluate.
     """
-    pass
 
 
 @batteries.command("list")
