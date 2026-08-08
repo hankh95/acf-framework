@@ -22,7 +22,7 @@ scoring procedures are battery-specific and platform-specific:
     correctness via an LLM judge, plus heuristic Zorblaxia
     classification). A reference adapter is documented in Paper 122 §5.
 
-The `acf-framework` v1.1.0 package ships the schemas, items, and this
+The `acf-framework` v1.1.1 package ships the schemas, items, and this
 loader. It does not ship a bundled LLM-judge runner; the methodology
 documents specify the procedure so third parties can implement against
 their own LLM provider, evaluation harness, or compute environment.
