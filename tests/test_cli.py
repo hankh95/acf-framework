@@ -18,7 +18,12 @@ class TestCLIBasics:
     def test_version(self, runner):
         result = runner.invoke(main, ["--version"])
         assert result.exit_code == 0
-        assert "1.1.0" in result.output
+        # Asserted against the package version, never a literal: a hardcoded
+        # number here silently passes on a stale install and fails only in CI
+        # at the next release, which is exactly how it behaved before 1.1.1.
+        from acf import __version__
+
+        assert __version__ in result.output
 
     def test_help(self, runner):
         result = runner.invoke(main, ["--help"])

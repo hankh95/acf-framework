@@ -137,7 +137,7 @@ procedure is:
      productive` aggregated.
 4. **Aggregate to the CG dimension** on the same 0–100 scale as §4.
 
-Reference code for the LLM path is **not bundled in v1.1.0**; the procedure
+Reference code for the LLM path is **not bundled in v1.1.1**; the procedure
 above implements against any chat-completions API. **Cross-paradigm scores
 are reported on a unified scale but are not directly numerically comparable**
 — see Paper 122 §5.3.

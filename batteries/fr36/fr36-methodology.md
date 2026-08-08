@@ -127,7 +127,7 @@ procedure scores the system's natural-language response per item:
 4. **Aggregate to the FR dimension** on the same 0–100 scale as §4.
 
 The reference scoring code for the LLM path is **not bundled in
-acf-framework v1.1.0**; the procedure above is sufficient to implement
+acf-framework v1.1.1**; the procedure above is sufficient to implement
 against any chat-completions API. A turn-key runner is tracked as future work.
 
 **Cross-paradigm comparability.** Per Paper 122 §5.3, FR scores produced by
