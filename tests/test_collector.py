@@ -105,6 +105,41 @@ class TestFilenameAndTimestampAgree:
             f"{timestamp_date} — the two clock reads disagree"
         )
 
+    def test_one_instant_feeds_both_even_across_midnight(self, monkeypatch, tmp_path):
+        """CH-7507: the filename and the timestamp come from ONE clock read.
+
+        A frozen clock returns the same instant for every call, so it cannot see the
+        TWO-read race this arm exists for: a run whose reads straddle UTC midnight
+        writes a file named for one day holding a record stamped the other. This
+        clock TICKS — the first read lands 23:59:59.9 Aug 8, every later read lands
+        Aug 9 — so the arm is red while two independent reads exist and green once
+        one instant feeds both. (A wall-clock test cannot see the sub-second window;
+        injection is the only honest way in.)
+        """
+        instants = [
+            datetime(2026, 8, 8, 23, 59, 59, 900000, tzinfo=timezone.utc),
+            datetime(2026, 8, 9, 0, 0, 0, 100000, tzinfo=timezone.utc),
+        ]
+        calls = {"n": 0}
+
+        class _TickingDateTime(datetime):
+            @classmethod
+            def now(cls, tz=None):
+                i = min(calls["n"], len(instants) - 1)
+                calls["n"] += 1
+                return instants[i]
+
+        monkeypatch.setattr(collector, "datetime", _TickingDateTime)
+        record = _run(data_dir=tmp_path)
+
+        written = _only_json(tmp_path)
+        filename_date = written.stem.rsplit("_", 1)[1]
+        timestamp_date = record["timestamp"][:10]
+        assert filename_date == timestamp_date, (
+            f"two clock reads straddled midnight: file named {filename_date}, record "
+            f"stamped {timestamp_date} — derive both from ONE datetime.now() (CH-7507)"
+        )
+
     def test_both_reads_are_utc(self, frozen_clock, tmp_path):
         """Positively: both derive from the UTC instant, not the local one.
 

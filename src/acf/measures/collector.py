@@ -22,7 +22,12 @@ def record_experiment_run(
     **kwargs: Any,
 ) -> dict[str, Any]:
     """Create and optionally save an experiment-run record."""
-    now = datetime.now(timezone.utc).isoformat()
+    # ONE clock read feeds both the record timestamp and the filename date: two
+    # independent reads let a run straddling UTC midnight write a file named for
+    # one day holding a record stamped the other (invisible wherever local date
+    # equals UTC, which is why it survived — pinned by the ticking-clock test).
+    now_dt = datetime.now(timezone.utc)
+    now = now_dt.isoformat()
     record = {
         "schema_version": "1.0.0",
         "record_type": "experiment-run",
@@ -42,7 +47,7 @@ def record_experiment_run(
 
     if data_dir:
         data_dir.mkdir(parents=True, exist_ok=True)
-        date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        date_str = now_dt.strftime("%Y-%m-%d")
         filename = f"{experiment_id}_{measure_id}_{system_id}_{date_str}.json"
         (data_dir / filename).write_text(json.dumps(record, indent=2))
 
