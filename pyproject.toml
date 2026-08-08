@@ -58,6 +58,11 @@ Issues = "https://github.com/hankh95/acf-framework/issues"
 [tool.hatch.build.targets.wheel]
 packages = ["src/acf"]
 
+[tool.hatch.build.targets.wheel.force-include]
+"knowledge" = "acf/_data/knowledge"
+"batteries" = "acf/_data/batteries"
+"schemas" = "acf/_data/schemas"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
