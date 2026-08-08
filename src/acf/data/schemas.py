@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Optional
+from typing import Any
 
 
 @dataclass
@@ -33,9 +33,9 @@ class ExperimentRun(CommonEnvelope):
     target: float = 0.0
     comparison: str = "GE"
     passed: bool = False
-    confidence_interval: Optional[list[float]] = None
-    effect_size: Optional[float] = None
-    p_value: Optional[float] = None
+    confidence_interval: list[float] | None = None
+    effect_size: float | None = None
+    p_value: float | None = None
 
     def to_dict(self) -> dict[str, Any]:
         d = {

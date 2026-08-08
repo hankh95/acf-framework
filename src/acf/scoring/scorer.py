@@ -8,9 +8,7 @@ a complete ACFProfile with certification level.
 
 from __future__ import annotations
 
-
 from acf.scoring.profile import ACFDimensionScore, ACFProfile
-
 
 # Bloom level to depth score mapping (ACF v1.1 Section 5.4 midpoints)
 BLOOM_DEPTH_MAP = {

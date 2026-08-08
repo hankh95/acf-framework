@@ -19,11 +19,10 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, cast
 
+import yurtle_rdflib
 from rdflib import Graph, Literal, Namespace
 from rdflib.namespace import RDF, RDFS, XSD
 from rdflib.query import ResultRow
-
-import yurtle_rdflib
 
 # ACF namespace for all framework-specific predicates
 ACF = Namespace("https://acf-framework.dev/ns/")
