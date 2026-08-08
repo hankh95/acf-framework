@@ -42,7 +42,7 @@ class TestGraphLoading:
         assert graph.triple_count() > 0
 
     def test_graph_has_significant_triples(self, graph):
-        # 12 dimensions + 6 levels + 74 measures + 16 hypotheses + sub-levels
+        # 12 dimensions + 6 levels + 75 measures + 16 hypotheses + sub-levels
         assert graph.triple_count() > 500
 
 
@@ -87,9 +87,9 @@ class TestDimensions:
 class TestMeasures:
     """Test measure loading and querying."""
 
-    def test_seventy_measures(self, graph):
+    def test_seventyfive_measures(self, graph):
         ms = graph.measures()
-        assert len(ms) == 74
+        assert len(ms) == 75
 
     def test_measures_have_ids(self, graph):
         ms = graph.measures()

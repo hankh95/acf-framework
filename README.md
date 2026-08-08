@@ -16,7 +16,7 @@ pip install acf-framework
 
 # Explore the framework
 acf dimensions              # List all 12 ACF dimensions
-acf measures                # List all 74 measures
+acf measures                # List all 75 measures
 acf levels                  # Show certification levels (ACF-1 through ACF-6)
 
 # Evaluate your system
@@ -74,7 +74,7 @@ These four dimensions are jointly reported on the same task instances, which is 
 
 ACF uses [yurtle-rdflib](https://github.com/hankh95/yurtle-rdflib) to load all knowledge files into a live RDF graph at startup. This means:
 
-- **All 74 measures** have `acf:mapsTo` triples linking them to ACF dimensions
+- **All 75 measures** carry a dimension-mapping triple linking them to ACF dimensions (`acf:mapsTo`; the proposed tranche uses `acf:mapsToDimension`)
 - **All 16 hypotheses** are queryable with their targets and validation methodology
 - **Collected data** (JSON files) is ingested as RDF triples for unified querying
 - **Ad-hoc analysis** via SPARQL — no custom code needed for common queries
@@ -119,9 +119,9 @@ acf query "<sparql>"                   # Run SPARQL over knowledge + data
 acf info                               # Show framework version and stats
 ```
 
-## 74 Measures
+## 75 Measures
 
-The framework includes 74 measures across 13 categories:
+The framework includes 75 measures across 13 categories:
 
 - **Accuracy** (M-001–M-010, M-070): Routing, hallucination, provenance, calibration, register mislabel
 - **Latency** (M-011–M-018): Processing paths, queries, end-to-end response
@@ -134,7 +134,7 @@ The framework includes 74 measures across 13 categories:
 - **Y-Layer Quality** (M-047–M-052): Fact correctness, inference coherence
 - **Y-Layer Structural** (M-053–M-055): Provenance, connectivity
 - **Proposed / Action Capability** (M-056–M-069): Domain count, Bloom profile, task completion, action capability (M-067–M-069, v1.1)
-- **Safety / Containment** (M-071–M-072): Containment violation rate, manifest-grant enforcement (v1.2)
+- **Safety / Containment** (M-071–M-072, M-075): Containment violation rate, manifest-grant enforcement, regression rollback (v1.2)
 - **Knowledge Transfer** (M-073–M-074): Load/unload differential, unloaded hallucination rate (v1.2)
 
 ## 16 Hypotheses

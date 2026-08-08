@@ -62,7 +62,11 @@ def _battery_root() -> Path:
       2. The packaged `batteries/` subtree (if shipped via wheel)
     """
     here = Path(__file__).resolve()
-    # Walk up until we find a sibling `batteries/` dir
+    # The wheel layout first: batteries/ is force-included at acf/_data/batteries.
+    packaged = here.parent / "_data" / "batteries"
+    if packaged.is_dir() and (packaged / "fr36").is_dir():
+        return packaged
+    # Walk up until we find a sibling `batteries/` dir (source checkout)
     for parent in [here.parent, here.parent.parent, here.parent.parent.parent]:
         candidate = parent / "batteries"
         if candidate.is_dir() and (candidate / "fr36").is_dir():

@@ -28,9 +28,23 @@ import yurtle_rdflib
 # ACF namespace for all framework-specific predicates
 ACF = Namespace("https://acf-framework.dev/ns/")
 
-# Default knowledge directory (bundled with package)
-_PACKAGE_ROOT = Path(__file__).parent.parent.parent
-KNOWLEDGE_DIR = _PACKAGE_ROOT / "knowledge"
+# Default knowledge directory. Two supported layouts, tried in order:
+#   1. `acf/_data/knowledge` — the wheel layout (force-included at build time),
+#   2. `<repo-root>/knowledge` — a source checkout (src/acf/graph.py -> repo root).
+# The old single-path resolution walked three parents up from THIS FILE, which in
+# an installed package lands on `<env>/lib/pythonX.Y/` — a directory that never
+# contains `knowledge/`, so every `pip install acf-framework` shipped a CLI whose
+# quick-start could not work (issue #30).
+def _default_knowledge_dir() -> Path:
+    here = Path(__file__).resolve().parent
+    candidates = (here / "_data" / "knowledge", here.parent.parent / "knowledge")
+    for candidate in candidates:
+        if candidate.is_dir():
+            return candidate
+    return candidates[-1]
+
+
+KNOWLEDGE_DIR = _default_knowledge_dir()
 
 
 @dataclass

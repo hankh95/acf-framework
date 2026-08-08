@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-ACF (AGI Certification Framework) is a graph-based framework for measuring AI system capabilities against human professional standards. It evaluates systems across 9 dimensions and 6 certification levels (ACF-1 Elementary through ACF-6 PhD/Board).
+ACF (AGI Certification Framework) is a graph-based framework for measuring AI system capabilities against human professional standards. It evaluates systems across 12 dimensions and 6 certification levels (ACF-1 Elementary through ACF-6 PhD/Board).
 
 ## Architecture
 
@@ -20,8 +20,8 @@ ACF (AGI Certification Framework) is a graph-based framework for measuring AI sy
 
 - **Yurtle format**: Markdown with TTL frontmatter for all knowledge
 - **ACF namespace**: `https://acf-framework.dev/ns/`
-- **Measures**: M-001 through M-066, each with `acf:mapsTo` dimension triples
-- **Hypotheses**: H122.1 through H122.14
+- **Measures**: M-001 through M-075 (no gaps, no duplicate ids — pinned by `tests/test_knowledge_consistency.py`); canonical measures carry `acf:mapsTo` dimension triples, the proposed tranche `acf:mapsToDimension`
+- **Hypotheses**: H122.1 through H122.16
 - **Data records**: experiment-run, longitudinal-series, per-query-record
 
 ## Development
