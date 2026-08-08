@@ -187,7 +187,7 @@ These hypotheses establish testable predictions about AGI measurement, dimension
 
 **H122.1 — Breadth-Depth Independence**: Tests whether Breadth and Depth are genuinely independent dimensions. If they correlate strongly (r > 0.3), the framework has redundant dimensions. A weak or negative correlation validates the framework's dimensional structure.
 
-**Validation**: Compute Pearson correlation between breadth and depth scores across multiple AI systems. Use `acf test H122.1 --data <dir>` to evaluate.
+**Validation**: Compute Pearson correlation between breadth and depth scores across multiple AI systems. Evaluate with `acf score --data <dir>` and compare the resulting profile against the target above.
 
 ### Certification Validity (H122.2)
 
@@ -247,10 +247,10 @@ Use the ACF CLI to evaluate hypotheses against collected data:
 
 ```bash
 # Test a specific hypothesis
-acf test H122.1 --data path/to/evaluation-data/
+acf score --data path/to/evaluation-data/
 
-# Test all hypotheses
-acf test --all --data path/to/evaluation-data/
+# Inspect a hypothesis and its target
+acf query "SELECT ?id ?target WHERE { ?h a acf:Hypothesis ; acf:id ?id ; acf:target ?target }"
 
 # View hypothesis details
 acf query "SELECT ?id ?label ?target WHERE {
