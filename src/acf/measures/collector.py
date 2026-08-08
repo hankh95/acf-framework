@@ -22,7 +22,8 @@ def record_experiment_run(
     **kwargs: Any,
 ) -> dict[str, Any]:
     """Create and optionally save an experiment-run record."""
-    now = datetime.now(timezone.utc).isoformat()
+    now_dt = datetime.now(timezone.utc)
+    now = now_dt.isoformat()
     record = {
         "schema_version": "1.0.0",
         "record_type": "experiment-run",
@@ -42,7 +43,9 @@ def record_experiment_run(
 
     if data_dir:
         data_dir.mkdir(parents=True, exist_ok=True)
-        date_str = datetime.now().strftime("%Y-%m-%d")
+        # Derived from the same instant recorded above, so a run near midnight
+        # can never produce a filename dated differently from its own record.
+        date_str = now_dt.strftime("%Y-%m-%d")
         filename = f"{experiment_id}_{measure_id}_{system_id}_{date_str}.json"
         (data_dir / filename).write_text(json.dumps(record, indent=2))
 

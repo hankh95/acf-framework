@@ -31,9 +31,10 @@ their own LLM provider, evaluation harness, or compute environment.
 from __future__ import annotations
 
 import json
+from collections.abc import Iterable
 from importlib import resources
 from pathlib import Path
-from typing import Iterable, Protocol, TypedDict, runtime_checkable
+from typing import Protocol, TypedDict, runtime_checkable
 
 # These are the canonical battery names. The actual JSONL files live at
 # repo-root/batteries/<name>/<name>.jsonl in the source tree, and at the
