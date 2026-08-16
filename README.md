@@ -75,7 +75,7 @@ These four dimensions are jointly reported on the same task instances, which is 
 ACF uses [yurtle-rdflib](https://github.com/hankh95/yurtle-rdflib) to load all knowledge files into a live RDF graph at startup. This means:
 
 - **All 75 measures** carry a dimension-mapping triple linking them to ACF dimensions (`acf:mapsTo`; the proposed tranche uses `acf:mapsToDimension`)
-- **All 16 hypotheses** are queryable with their targets and validation methodology
+- **All 17 hypotheses** are queryable with their targets and validation methodology
 - **Collected data** (JSON files) is ingested as RDF triples for unified querying
 - **Ad-hoc analysis** via SPARQL — no custom code needed for common queries
 
@@ -139,7 +139,7 @@ The framework includes 75 measures across 13 categories:
 
 ## 16 Hypotheses
 
-The framework includes 16 testable hypotheses about AGI measurement:
+The framework includes 17 testable hypotheses about AGI measurement:
 
 - **H122.1**: Breadth-Depth Independence (r < 0.3)
 - **H122.2**: Human Certification Equivalence (ACF-3+)
