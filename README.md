@@ -137,7 +137,7 @@ The framework includes 75 measures across 13 categories:
 - **Safety / Containment** (M-071–M-072, M-075): Containment violation rate, manifest-grant enforcement, regression rollback (v1.2)
 - **Knowledge Transfer** (M-073–M-074): Load/unload differential, unloaded hallucination rate (v1.2)
 
-## 16 Hypotheses
+## 17 Hypotheses
 
 The framework includes 17 testable hypotheses about AGI measurement:
 
@@ -157,6 +157,7 @@ The framework includes 17 testable hypotheses about AGI measurement:
 - **H122.14**: Self-Directed Learning
 - **H122.15**: Capability Containment — a loaded module cannot exceed its signed manifest grants (Safety/Containment SC4; v1.2)
 - **H122.16**: Capability Transfer — module-attributable load/unload differential; unloaded hallucinated-domain-answer rate = 0 (Knowledge Transfer KTR4; v1.2)
+- **H122.17**: Integrated Plane Coherence — epistemic contracts hold across plane boundaries under an 8-fault battery; plane_coherence_contract_violations = 0 (provisionally Compositional Generalization, dimension review pending; v1.3)
 
 ## Installation
 
