@@ -94,8 +94,11 @@ def test_counts_are_self_consistent(graph: ACFGraph) -> None:
 
     assert dims == 12, f"dimension count moved to {dims}; update the README and any published figure"
     assert measures == 75, f"measure count moved to {measures}; update the README and any published figure"
-    assert hypotheses == 16, (
-        f"hypothesis count moved to {hypotheses}. Note 16 is the count of DISTINCT "
-        "acf:Hypothesis subjects; a plain grep for the type string returns 17 because a "
-        "SPARQL example in the same file mentions it."
+    assert hypotheses == 17, (
+        f"hypothesis count moved to {hypotheses}. Note 17 is the count of DISTINCT "
+        "acf:Hypothesis subjects; a plain grep for the type string returns 19 because "
+        "TWO SPARQL examples in the same file mention it (the usage block near the end "
+        "of paper-122-hypotheses.md). Verify the distinct count before changing this "
+        "number, and re-check the README and any published figure rather than bumping "
+        "the test to match."
     )
