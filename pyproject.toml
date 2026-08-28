@@ -10,7 +10,7 @@ readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
 authors = [
-    { name = "Hank Hagedorn", email = "hank@conguent.systems" }
+    { name = "Hank Head", email = "hankh1844@gmail.com" }
 ]
 keywords = [
     "agi", "certification", "benchmark", "evaluation",
