@@ -75,7 +75,7 @@ These four dimensions are jointly reported on the same task instances, which is 
 ACF uses [yurtle-rdflib](https://github.com/hankh95/yurtle-rdflib) to load all knowledge files into a live RDF graph at startup. This means:
 
 - **All 75 measures** carry a dimension-mapping triple linking them to ACF dimensions (`acf:mapsTo`; the proposed tranche uses `acf:mapsToDimension`)
-- **All 16 hypotheses** are queryable with their targets and validation methodology
+- **All 17 hypotheses** are queryable with their targets and validation methodology
 - **Collected data** (JSON files) is ingested as RDF triples for unified querying
 - **Ad-hoc analysis** via SPARQL — no custom code needed for common queries
 
@@ -137,9 +137,9 @@ The framework includes 75 measures across 13 categories:
 - **Safety / Containment** (M-071–M-072, M-075): Containment violation rate, manifest-grant enforcement, regression rollback (v1.2)
 - **Knowledge Transfer** (M-073–M-074): Load/unload differential, unloaded hallucination rate (v1.2)
 
-## 16 Hypotheses
+## 17 Hypotheses
 
-The framework includes 16 testable hypotheses about AGI measurement:
+The framework includes 17 testable hypotheses about AGI measurement:
 
 - **H122.1**: Breadth-Depth Independence (r < 0.3)
 - **H122.2**: Human Certification Equivalence (ACF-3+)
@@ -157,6 +157,7 @@ The framework includes 16 testable hypotheses about AGI measurement:
 - **H122.14**: Self-Directed Learning
 - **H122.15**: Capability Containment — a loaded module cannot exceed its signed manifest grants (Safety/Containment SC4; v1.2)
 - **H122.16**: Capability Transfer — module-attributable load/unload differential; unloaded hallucinated-domain-answer rate = 0 (Knowledge Transfer KTR4; v1.2)
+- **H122.17**: Integrated Plane Coherence — epistemic contracts hold across plane boundaries under an 8-fault battery; plane_coherence_contract_violations = 0 (provisionally Compositional Generalization, dimension review pending; v1.3)
 
 ## Installation
 

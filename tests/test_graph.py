@@ -42,7 +42,7 @@ class TestGraphLoading:
         assert graph.triple_count() > 0
 
     def test_graph_has_significant_triples(self, graph):
-        # 12 dimensions + 6 levels + 75 measures + 16 hypotheses + sub-levels
+        # 12 dimensions + 6 levels + 75 measures + 17 hypotheses + sub-levels
         assert graph.triple_count() > 500
 
 
@@ -144,9 +144,12 @@ class TestLevels:
 class TestHypotheses:
     """Test hypothesis loading."""
 
-    def test_fourteen_hypotheses(self, graph):
+    def test_hypothesis_count(self, graph):
+        # Renamed: it was `test_fourteen_hypotheses` while asserting 16, so the name
+        # had already drifted twice. A count-pinning test whose name states a
+        # different count is worse than no name at all — a reader trusts the name.
         hyps = graph.hypotheses()
-        assert len(hyps) == 16
+        assert len(hyps) == 17
 
     def test_hypothesis_ids(self, graph):
         hyps = graph.hypotheses()
@@ -155,6 +158,7 @@ class TestHypotheses:
         assert "H122.14" in ids
         assert "H122.15" in ids
         assert "H122.16" in ids
+        assert "H122.17" in ids
 
     def test_hypothesis_has_description(self, graph):
         hyps = graph.hypotheses()
